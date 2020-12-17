@@ -37,6 +37,7 @@
   },
   "homepage": "https://github.com/TheAnnalyst/scouting-frontend#readme",
   "dependencies": {
+    "@types/express": "^4.17.9",
     "express": "^4.17.1",
     "frc-scouting": "^0.1.2"
   }
