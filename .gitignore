@@ -107,7 +107,8 @@ dist
 built/*
 package-lock.json
 
-# test files
-src/storage/test
-
 .npmrc
+
+# Private data
+config.json
+databases/*
