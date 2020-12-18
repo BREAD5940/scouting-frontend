@@ -111,4 +111,5 @@ package-lock.json
 
 # Private data
 config.json
+authority.json
 databases/*
