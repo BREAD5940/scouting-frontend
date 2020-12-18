@@ -53,9 +53,6 @@ server.use(auth({
     issuerBaseURL: Config.auth0Domain,
 }));
 
-// views
-// idk
-
 server.get('/', async (req: AuthenticatedRequest, res) => {
     let html = `Hello! This is the FRC Team ${Config.teamNumber || 5940} scouting website.`;
 
