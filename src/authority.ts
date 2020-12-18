@@ -4,8 +4,8 @@
  * @author Annika
  */
 
-import { auth } from 'express-openid-connect';
 import {readFileSync} from 'fs';
+import type {NextFunction, Response} from 'express';
 
 import {AuthenticatedRequest} from './index';
 
@@ -19,6 +19,19 @@ const AUTHORITY_LEVELS = {
 // Source: http://www.emailregex.com/
 /* eslint-disable-next-line max-len */
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+
+/** Middleware to gate access to a certain auth level */
+export function accessGate(authLevel: string) {
+    return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
+        if (!AuthManager.toUser(req)?.atLeast(authLevel)) {
+            return res.send(
+                `<h3>Access denied - you must be logged into an account with at least ${authLevel} authority.</h3>` +
+                `<a href="/">Back to homepage</a>`,
+            );
+        }
+        next();
+    };
+}
 
 /** Manages authority */
 export class AuthorityManager {
@@ -81,7 +94,7 @@ export class User {
 
     /** constructor */
     constructor(email: string, authority: AuthorityManager) {
-        this.email = email;
+        this.email = email.toLowerCase().replace(/[^a-zA-Z0-9@\.-]/g, '');
         this.authority = authority;
     }
 
@@ -109,4 +122,22 @@ export class User {
     get authLevelName(): string {
         return AUTHORITY_LEVELS[this.authority.getAuth(this.email)];
     }
+}
+
+/** authority info */
+export function AuthorityAPI(req: AuthenticatedRequest, res: Response) {
+    if (!req.query.email) {
+        return res.send(
+            `<a href="/getauthority?email=me"><button>Get your own authority level</button></a>` +
+            `<h4>Get authority level for an email</h4>` +
+            `<form action="/getauthority">` +
+                `<label for="email">Email address:</label> <input type="text" id="email" name="email"><br />` +
+                `<input type="submit" value="Submit">` +
+            `</form>`,
+        );
+    }
+
+    const email = req.query.email === 'me' ? req.oidc?.user?.email || 'none': req.query.email.toString();
+    const auth = AuthManager.toUser(email);
+    res.send(`${email} has authority ${auth?.authLevelName} (${auth?.authLevel})`);
 }
