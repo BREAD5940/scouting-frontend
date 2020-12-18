@@ -11,7 +11,7 @@ import {auth, RequestContext} from 'express-openid-connect';
 import {ConfigLoader} from './config';
 import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
 
-type AuthenticatedRequest = Request & {oidc?: RequestContext & {user?: any & {name?: string}}};
+export type AuthenticatedRequest = Request & {oidc?: RequestContext & {user?: any & {name?: string}}};
 
 const CONFIG_PATH = `${__dirname}/../config.json`;
 const SQLITE_REGEX = /\.(db|sql(ite3?)?)$/;
