@@ -12,7 +12,8 @@ import {AuthenticatedRequest} from './index';
 const AUTHORITY_LEVELS = {
     0: 'Unauthenticated',
     10: 'Team Member',
-    20: 'Developer',
+    20: 'Scouter',
+    30: 'Developer',
     100: 'System Administrator',
 };
 
