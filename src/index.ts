@@ -5,12 +5,16 @@
  */
 
 import express from 'express';
+import type {Request} from 'express';
+import {auth, RequestContext} from 'express-openid-connect';
+
 import {ConfigLoader} from './config';
 import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
 
+type AuthenticatedRequest = Request & {oidc?: RequestContext & {user?: any & {name?: string}}};
+
 const CONFIG_PATH = `${__dirname}/../config.json`;
 const SQLITE_REGEX = /\.(db|sql(ite3?)?)$/;
-
 declare global {
     var Config: ConfigLoader;
     var Backend: StorageBackend;
@@ -18,11 +22,12 @@ declare global {
 
 global.Config = new ConfigLoader(CONFIG_PATH);
 
-if (!Config.storageLocation) {
-    throw new Error(`You must specify "storageLocation" in the configuration file (${CONFIG_PATH}).`);
-}
-if (!Config.port) {
-    throw new Error(`You must specify "port" in the configuration file (${CONFIG_PATH}).`);
+for (
+    const required of ['storageLocation', 'port', 'auth0ClientID', 'auth0ClientSecret', 'auth0Domain', 'sessionSecret']
+) {
+    if (!Config[required]) {
+        throw new Error(`You must specify "${required}" in the configuration file (${Config.path}).`);
+    }
 }
 
 if (SQLITE_REGEX.test(Config.storageLocation)) {
@@ -33,9 +38,30 @@ if (SQLITE_REGEX.test(Config.storageLocation)) {
 
 const server = express();
 
-// TODO: do stuff
-// authentication
+server.use(auth({
+    secret: Config.sessionSecret,
+    authRequired: false,
+    auth0Logout: true,
+    baseURL: `${Config.domain || 'http://localhost'}:${Config.port}`,
+    clientID: Config.auth0ClientID,
+    clientSecret: Config.auth0ClientSecret,
+    enableTelemetry: false,
+    issuerBaseURL: Config.auth0Domain,
+}));
+
 // views
 // idk
 
-server.listen(Config.port, () => console.log(`Listening on http://127.0.0.1:${Config.port}`));
+server.get('/', async (req: AuthenticatedRequest, res) => {
+    let html = `Hello! This is the FRC Team ${Config.teamNumber || 5940} scouting website.`;
+
+    if (req.oidc?.isAuthenticated && req.oidc.user) {
+        html += `<p>You are logged in as ${(req.oidc.user as any).name || 'an unknown user'}.</p>`;
+    } else {
+        html += `<p>You will need to <a href="/login">log in</a> to use this service.</p>`;
+    }
+
+    res.send(html);
+});
+
+server.listen(Config.port, () => console.log(`Listening on http://localhost:${Config.port}`));
