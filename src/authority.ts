@@ -4,7 +4,7 @@
  * @author Annika
  */
 
-import {readFileSync} from 'fs';
+import {readFileSync, writeFile} from 'fs';
 import type {NextFunction, Response} from 'express';
 
 import {AuthenticatedRequest} from './index';
@@ -36,13 +36,15 @@ export function accessGate(authLevel: string) {
 
 /** Manages authority */
 export class AuthorityManager {
+    path: string;
     /** email:authority level map */
     users = new Map<string, keyof typeof AUTHORITY_LEVELS>();
 
     /** constructor */
     constructor(path: string) {
+        this.path = path;
         try {
-            this.loadJSON(JSON.parse(readFileSync(path).toString()));
+            this.loadJSON(JSON.parse(readFileSync(this.path).toString()));
         } catch (e) {
             console.warn(`Error loading auth: ${e}`);
         }
@@ -60,8 +62,28 @@ export class AuthorityManager {
             }
             if (!(authLevel in AUTHORITY_LEVELS)) throw new Error(`Unknown authority level: ${authLevel}`);
 
-            this.users.set(email, authLevel as keyof typeof AUTHORITY_LEVELS);
+            this.setAuth(email, authLevel as keyof typeof AUTHORITY_LEVELS, true);
         }
+    }
+
+    /** save authority */
+    async saveAuthority() {
+        const json = JSON.stringify(Object.fromEntries(this.users));
+        return new Promise<void>((resolve, reject) => {
+            writeFile(this.path, json, (err) => {
+                if (err) {
+                    reject(err);
+                } else {
+                    resolve();
+                }
+            });
+        });
+    }
+
+    /** sets auth */
+    async setAuth(email: string, level: keyof typeof AUTHORITY_LEVELS, noFSWrite?: boolean) {
+        this.users.set(email, level);
+        if (!noFSWrite) await this.saveAuthority();
     }
 
     /** gets the auth associated with an email */
@@ -126,10 +148,11 @@ export class User {
 }
 
 /** authority info */
-export function AuthorityAPI(req: AuthenticatedRequest, res: Response) {
+export function AuthorityViewingAPI(req: AuthenticatedRequest, res: Response) {
     if (!req.query.email) {
         return res.send(
             `<a href="/getauthority?email=me"><button>Get your own authority level</button></a>` +
+            `<hr />` +
             `<h4>Get authority level for an email</h4>` +
             `<form action="/getauthority">` +
                 `<label for="email">Email address:</label> <input type="text" id="email" name="email"><br />` +
@@ -141,4 +164,35 @@ export function AuthorityAPI(req: AuthenticatedRequest, res: Response) {
     const email = req.query.email === 'me' ? req.oidc?.user?.email || 'none': req.query.email.toString();
     const auth = AuthManager.toUser(email);
     res.send(`${email} has authority ${auth?.authLevelName} (${auth?.authLevel})`);
+}
+
+/** authority setting */
+export function AuthoritySettingAPI(req: AuthenticatedRequest, res: Response) {
+    if (!req.query.email || !req.query.authlevel) {
+        return res.send(
+            `<h4>Set authority level for an email</h4>` +
+            `<form action="/setauthority">` +
+                `<label for="email">Email address:</label> <input type="text" id="email" name="email"><br />` +
+                `<label for="authlevel">Authority level:</label>` +
+                `<select id="authlevel" name="authlevel">` +
+                    Object.entries(AUTHORITY_LEVELS)
+                        .map(([level, name]) => `<option value="${level}">${name}</option>`)
+                        .join('') +
+                `</select><br />` +
+                `<input type="submit" value="Set authority level">` +
+            `</form>`,
+        );
+    }
+
+    const email = req.query.email.toString();
+    const authLevel = parseInt(req.query.authlevel.toString());
+
+    if (!EMAIL_REGEX.test(email)) return res.send(`'${email}' is not a valid email`);
+    if (isNaN(authLevel) || !(authLevel in AUTHORITY_LEVELS)) {
+        return res.send(`'${authLevel}' is not a valid authority level`);
+    }
+
+    AuthManager.setAuth(email, authLevel as keyof typeof AUTHORITY_LEVELS);
+
+    res.send(`${email}'s authority was set to ${AUTHORITY_LEVELS[authLevel as keyof typeof AUTHORITY_LEVELS]}`);
 }

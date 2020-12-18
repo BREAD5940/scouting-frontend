@@ -10,7 +10,7 @@ import {auth, RequestContext} from 'express-openid-connect';
 
 import {ConfigLoader} from './config';
 import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
-import {accessGate, AuthorityAPI, AuthorityManager} from './authority';
+import {accessGate, AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
 
 export type AuthenticatedRequest = Request & {oidc?: RequestContext & {user?: any & {name?: string, email?: string}}};
 
@@ -66,6 +66,7 @@ server.get('/', async (req: AuthenticatedRequest, res) => {
     res.send(html);
 });
 
-server.get('/getauthority', accessGate('Developer'), AuthorityAPI);
+server.get('/getauthority', accessGate('Developer'), AuthorityViewingAPI);
+server.get('/setauthority', accessGate('System Administrator'), AuthoritySettingAPI);
 
 server.listen(Config.port, () => console.log(`Listening on http://localhost:${Config.port}`));
