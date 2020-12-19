@@ -12,7 +12,7 @@ import {ConfigLoader} from './config';
 import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
 import {accessGate, AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
 
-import {TeamView} from './pages/teams';
+import {TeamAdd, TeamView} from './pages/teams';
 
 export type AuthenticatedRequest = Request & {oidc?: RequestContext & {user?: any & {name?: string, email?: string}}};
 
@@ -72,5 +72,6 @@ server.get('/getauthority', accessGate('Developer'), AuthorityViewingAPI);
 server.get('/setauthority', accessGate('System Administrator'), AuthoritySettingAPI);
 
 server.get('/viewteam', accessGate('Team Member'), TeamView);
+server.get('/addteam', accessGate('Scouter'), TeamAdd);
 
 server.listen(Config.port, () => console.log(`Listening on http://localhost:${Config.port}`));
