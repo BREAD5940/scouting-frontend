@@ -51,7 +51,7 @@ export class AuthorityManager {
     }
 
     /** Loads in parsed JSON data */
-    loadJSON(data: {[k: string]: number | string}) {
+    loadJSON(data: {[key: string]: number | string}) {
         for (let [email, authLevel] of Object.entries(data)) {
             if (!EMAIL_REGEX.test(email)) throw new Error(`Bad email address: ${email}`);
 

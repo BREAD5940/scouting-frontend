@@ -10,7 +10,7 @@ import {readFileSync, copyFileSync} from 'fs';
 /** Contains and loads configuration information */
 export class ConfigLoader {
     path: string;
-    [k: string]: any;
+    [key: string]: any;
 
     /** constructor */
     constructor(path: string) {
