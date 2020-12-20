@@ -13,7 +13,7 @@ import {ConfigLoader} from './config';
 import {accessGate, AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
 
 import {TeamAdd, TeamView} from './pages/teams';
-import {MatchView} from './pages/infinite-recharge-matches';
+import {MatchAdd, MatchView} from './pages/infinite-recharge-matches';
 
 export type AuthenticatedRequest = Request & {oidc?: RequestContext & {user?: any & {name?: string, email?: string}}};
 
@@ -78,8 +78,9 @@ server.get('/setauthority', accessGate('System Administrator'), AuthoritySetting
 server.get('/viewteam', accessGate('Team Member'), TeamView);
 server.get('/addteam', accessGate('Scouter'), TeamAdd);
 
-// src/page/match.ts
+// src/page/infinite-recharge-matches.ts
 server.get('/viewmatch', accessGate('Team Member'), MatchView);
+server.get('/addmatch', accessGate('Scouter'), MatchAdd);
 // ----- End pages from other files -----
 
 // All pages are loaded, start the server!
