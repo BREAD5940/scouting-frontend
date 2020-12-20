@@ -7,12 +7,13 @@
 import express from 'express';
 import type {Request} from 'express';
 import {auth, RequestContext} from 'express-openid-connect';
+import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
 
 import {ConfigLoader} from './config';
-import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
 import {accessGate, AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
 
 import {TeamAdd, TeamView} from './pages/teams';
+import {MatchView} from './pages/infinite-recharge-matches';
 
 export type AuthenticatedRequest = Request & {oidc?: RequestContext & {user?: any & {name?: string, email?: string}}};
 
@@ -68,10 +69,18 @@ server.get('/', async (req: AuthenticatedRequest, res) => {
     res.send(html);
 });
 
+// ----- Pages from other files -----
+// src/authority.ts
 server.get('/getauthority', accessGate('Developer'), AuthorityViewingAPI);
 server.get('/setauthority', accessGate('System Administrator'), AuthoritySettingAPI);
 
+// src/page/teams.ts
 server.get('/viewteam', accessGate('Team Member'), TeamView);
 server.get('/addteam', accessGate('Scouter'), TeamAdd);
 
+// src/page/match.ts
+server.get('/viewmatch', accessGate('Team Member'), MatchView);
+// ----- End pages from other files -----
+
+// All pages are loaded, start the server!
 server.listen(Config.port, () => console.log(`Listening on http://localhost:${Config.port}`));
