@@ -4,10 +4,10 @@
  * @author Annika
  */
 
-import {readFileSync, writeFile} from 'fs';
+import {readFileSync} from 'fs';
 import type {Response} from 'express';
 
-import {checkEmailValidity, isValidEmail} from './lib';
+import {checkEmailValidity, isValidEmail, writeFilePromisified} from './lib';
 import {AuthenticatedRequest} from './index';
 
 const AUTHORITY_LEVELS = {
@@ -53,15 +53,7 @@ export class AuthorityManager {
     /** save authority */
     async saveAuthority() {
         const json = JSON.stringify(Object.fromEntries(this.users));
-        return new Promise<void>((resolve, reject) => {
-            writeFile(this.path, json, (err) => {
-                if (err) {
-                    reject(err);
-                } else {
-                    resolve();
-                }
-            });
-        });
+        await writeFilePromisified(this.path, json);
     }
 
     /** sets auth */

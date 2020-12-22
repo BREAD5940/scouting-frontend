@@ -7,6 +7,8 @@
 import type {NextFunction, Response} from 'express';
 import type {AuthenticatedRequest} from '../index';
 
+import * as fs from 'fs';
+
 // Source: http://www.emailregex.com/
 /* eslint-disable-next-line max-len */
 const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -47,4 +49,43 @@ export function checkEmailValidity(email: string) {
     if (!isValidEmail(email)) {
         throw new Error(`Invalid E-mail address: '${email}'`);
     }
+}
+
+/** async file writing */
+export async function writeFilePromisified(path: string, data: string) {
+    return new Promise<void>((resolve, reject) => {
+        fs.writeFile(path, data, (err) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve();
+            }
+        });
+    });
+}
+
+/** async file reading */
+export async function readFilePromisified(path: string) {
+    return new Promise<Buffer>((resolve, reject) => {
+        fs.readFile(path, (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    });
+}
+
+/** async readdir */
+export async function readdirPromisified(path: string) {
+    return new Promise<Buffer>((resolve, reject) => {
+        fs.readdir(path, (err, data) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(data);
+            }
+        });
+    });
 }
