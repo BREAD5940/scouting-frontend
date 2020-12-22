@@ -7,7 +7,17 @@
 import type {Response} from 'express';
 import type {AuthenticatedRequest} from '../index';
 
-import {Team} from 'frc-scouting';
+import {InfiniteRecharge, Team} from 'frc-scouting';
+
+const NORMALIZE_REGEX = /([A-Z])/g;
+
+/** Turns a TypeScript/JavaScript variable name into something human readable */
+function normalizePropertyName(camelCaseName: string) {
+    return camelCaseName.replace(
+        NORMALIZE_REGEX,
+        (match, uppercase) => match.replace(uppercase, ` ${uppercase.toLowerCase()}`),
+    );
+}
 
 /** Views a team */
 export function TeamView(req: AuthenticatedRequest, res: Response) {
@@ -23,9 +33,21 @@ export function TeamView(req: AuthenticatedRequest, res: Response) {
             html += `<h3>Team ${num}:</h3>`;
             html += `Mean points: ${team.getMean('points')}`;
             html += `<br />`;
-            html += `<details><summary><h5>Matches</h5></summary><ul>`;
+
+            if (req.query.stat) {
+                const stat = req.query.stat.toString();
+                try {
+                    html += `Mean ${normalizePropertyName(stat)}: `;
+                    html += team.getMean(stat as keyof InfiniteRecharge.InfiniteRechargeMatch);
+                } catch (e) {
+                    html += `Invalid stat: '${stat}'`;
+                }
+                html += `<br />`;
+            }
+
+            html += `<details><summary><strong>Matches</strong></summary><ul>`;
             html += team.matches
-                .map((match) => `<li><a href="/viewmatch?number=${match.number}">Match ${match.number}</a></li>`)
+                .map((match) => `<li><a href="/viewmatch?match=${match.number}">Match ${match.number}</a></li>`)
                 .join('');
             html += `</ul></details>`;
         }
@@ -33,10 +55,19 @@ export function TeamView(req: AuthenticatedRequest, res: Response) {
         return res.send(html);
     }
 
+    const dummyMatch = new InfiniteRecharge.InfiniteRechargeMatch(-1, 'dummy', -1, 'RED', {});
+
     return res.send(
         `<h1>View info about a team!</h1>` +
         `<form action="/viewteam">` +
             `<label for="team">Team number:</label> <input type="text" id="team" name="team"><br />` +
+            `<label for="stat">Statistic to view:</label> ` +
+            `<select id="stat" name="stat">` +
+                Object.keys(dummyMatch)
+                    .filter((prop) => typeof dummyMatch[prop as keyof typeof dummyMatch] === 'number')
+                    .map((prop) => `<option value="${prop}">${normalizePropertyName(prop)}</option>`)
+                    .join('') +
+            `</select><br />` +
             `<input type="submit" value="View!">` +
         `</form>`,
     );
