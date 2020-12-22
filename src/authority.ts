@@ -8,7 +8,7 @@ import {readFileSync} from 'fs';
 import type {Response} from 'express';
 
 import {checkEmailValidity, isValidEmail, writeFilePromisified} from './lib';
-import {AuthenticatedRequest} from './index';
+import {AuthenticatedRequest} from '.';
 
 const AUTHORITY_LEVELS = {
     0: 'Unauthorized',

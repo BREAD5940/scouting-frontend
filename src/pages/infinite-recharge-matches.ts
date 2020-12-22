@@ -6,7 +6,7 @@
 
 
 import type {Response} from 'express';
-import type {AuthenticatedRequest} from '../index';
+import type {AuthenticatedRequest} from '..';
 
 import {InfiniteRecharge} from 'frc-scouting';
 

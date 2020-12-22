@@ -8,7 +8,7 @@ import type {Response} from 'express';
 import {InfiniteRecharge, Team} from 'frc-scouting';
 
 import {normalizePropertyName} from '../lib';
-import type {AuthenticatedRequest} from '../index';
+import type {AuthenticatedRequest} from '..';
 
 /** Views a team */
 export function TeamView(req: AuthenticatedRequest, res: Response) {

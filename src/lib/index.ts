@@ -5,7 +5,7 @@
  */
 
 import type {NextFunction, Response} from 'express';
-import type {AuthenticatedRequest} from '../index';
+import type {AuthenticatedRequest} from '..';
 
 import * as fs from 'fs';
 
