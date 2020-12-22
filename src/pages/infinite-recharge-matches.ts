@@ -16,7 +16,7 @@ export function MatchView(req: AuthenticatedRequest, res: Response) {
         let html = `<h1>Viewing match ${req.query.match}</h1>`;
 
         const num = parseInt(req.query.match.toString());
-        const match = Backend.getMatchByNumber(num) as InfiniteRecharge.InfiniteRechargeMatch;
+        const match = Backend.getMatchByNumber(num) as InfiniteRecharge.InfiniteRechargeMatch | null;
 
         if (!match) {
             html += `There is no match numbered ${num} in the database.`;
