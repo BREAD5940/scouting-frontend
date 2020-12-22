@@ -8,7 +8,7 @@ import express from 'express';
 import type {Request} from 'express';
 import {auth, RequestContext} from 'express-openid-connect';
 import {existsSync} from 'fs';
-import {sep as pathSeparator} from 'path';
+import {sep as pathSeparator, join as joinPath} from 'path';
 import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
 
 import {ConfigLoader} from './config';
@@ -141,6 +141,9 @@ server.get('/addteam', accessGate('Scouter'), TeamAdd);
 server.get('/viewmatch', accessGate('Team Member'), MatchView);
 server.get('/addmatch', accessGate('Scouter'), MatchAdd);
 // ----- End pages from other files -----
+
+// Serve static CSS resources
+server.use('/css', express.static(joinPath(Resources.path, 'css')));
 
 // All pages are loaded, start the server!
 server.listen(Config.port, () => console.log(`Listening on ${Config.domain || 'http://localhost'}:${Config.port}`));
