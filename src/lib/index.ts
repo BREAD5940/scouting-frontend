@@ -79,7 +79,7 @@ export async function readFilePromisified(path: string) {
 
 /** async readdir */
 export async function readdirPromisified(path: string) {
-    return new Promise<Buffer>((resolve, reject) => {
+    return new Promise<string[]>((resolve, reject) => {
         fs.readdir(path, (err, data) => {
             if (err) {
                 reject(err);
