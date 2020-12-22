@@ -5,19 +5,10 @@
  */
 
 import type {Response} from 'express';
-import type {AuthenticatedRequest} from '../index';
-
 import {InfiniteRecharge, Team} from 'frc-scouting';
 
-const NORMALIZE_REGEX = /([A-Z])/g;
-
-/** Turns a TypeScript/JavaScript variable name into something human readable */
-function normalizePropertyName(camelCaseName: string) {
-    return camelCaseName.replace(
-        NORMALIZE_REGEX,
-        (match, uppercase) => match.replace(uppercase, ` ${uppercase.toLowerCase()}`),
-    );
-}
+import {normalizePropertyName} from '../lib';
+import type {AuthenticatedRequest} from '../index';
 
 /** Views a team */
 export function TeamView(req: AuthenticatedRequest, res: Response) {

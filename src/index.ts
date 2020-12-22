@@ -10,7 +10,8 @@ import {auth, RequestContext} from 'express-openid-connect';
 import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
 
 import {ConfigLoader} from './config';
-import {accessGate, AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
+import {AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
+import {accessGate} from './lib';
 
 import {TeamAdd, TeamView} from './pages/teams';
 import {MatchAdd, MatchView} from './pages/infinite-recharge-matches';

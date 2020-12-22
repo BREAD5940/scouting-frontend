@@ -5,8 +5,9 @@
  */
 
 import {readFileSync, writeFile} from 'fs';
-import type {NextFunction, Response} from 'express';
+import type {Response} from 'express';
 
+import {checkEmailValidity, isValidEmail} from './lib';
 import {AuthenticatedRequest} from './index';
 
 const AUTHORITY_LEVELS = {
@@ -16,23 +17,6 @@ const AUTHORITY_LEVELS = {
     30: 'Developer',
     100: 'System Administrator',
 };
-
-// Source: http://www.emailregex.com/
-/* eslint-disable-next-line max-len */
-const EMAIL_REGEX = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
-
-/** Middleware to gate access to a certain auth level */
-export function accessGate(authLevel: string) {
-    return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
-        if (!AuthManager.toUser(req)?.atLeast(authLevel)) {
-            return res.send(
-                `<h3>Access denied - you must be logged into an account with at least ${authLevel} authority.</h3>` +
-                `<a href="/">Back to homepage</a>`,
-            );
-        }
-        next();
-    };
-}
 
 /** Manages authority */
 export class AuthorityManager {
@@ -53,7 +37,7 @@ export class AuthorityManager {
     /** Loads in parsed JSON data */
     loadJSON(data: {[key: string]: number | string}) {
         for (let [email, authLevel] of Object.entries(data)) {
-            if (!EMAIL_REGEX.test(email)) throw new Error(`Bad email address: ${email}`);
+            checkEmailValidity(email);
 
             if (typeof authLevel === 'string') {
                 for (const [number, name] of Object.entries(AUTHORITY_LEVELS)) {
@@ -100,7 +84,7 @@ export class AuthorityManager {
     requestToUser(request: AuthenticatedRequest): User | null {
         const email = request.oidc?.user?.email;
 
-        if (!email || !EMAIL_REGEX.test(email)) return null;
+        if (!email || !isValidEmail(email)) return null;
         return this.emailToUser(email);
     }
 
@@ -187,7 +171,7 @@ export function AuthoritySettingAPI(req: AuthenticatedRequest, res: Response) {
     const email = req.query.email.toString();
     const authLevel = parseInt(req.query.authlevel.toString());
 
-    if (!EMAIL_REGEX.test(email)) return res.send(`'${email}' is not a valid email`);
+    if (!isValidEmail(email)) return res.send(`'${email}' is not a valid email`);
     if (isNaN(authLevel) || !(authLevel in AUTHORITY_LEVELS)) {
         return res.send(`'${authLevel}' is not a valid authority level`);
     }
