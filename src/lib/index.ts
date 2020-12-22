@@ -18,6 +18,12 @@ const NORMALIZE_REGEX = /([A-Z])/g;
 export function accessGate(authLevel: string) {
     return (req: AuthenticatedRequest, res: Response, next: NextFunction) => {
         if (!AuthManager.toUser(req)?.atLeast(authLevel)) {
+            if (Config.nosecurity) {
+                console.log(
+                    `Unauthenticated access to ${req.path} GRANTED to ${req.ip} (disable Config.nosecurity to prevent)`,
+                );
+                return next();
+            }
             return res.send(
                 `<h3>Access denied - you must be logged into an account with at least ${authLevel} authority.</h3>` +
                 `<a href="/login">Log in</a> | <a href="/">Back to homepage</a>`,

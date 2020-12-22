@@ -34,9 +34,14 @@ declare global {
 (global as any).AuthManager = new AuthorityManager(AUTHORITY_PATH);
 (global as any).Resources = new ResourceManager(RESOURCES_PATH);
 
-for (
-    const required of ['storageLocation', 'port', 'auth0ClientID', 'auth0ClientSecret', 'auth0Domain', 'sessionSecret']
-) {
+const requiredConfigSettings = ['storageLocation', 'port'];
+
+if (!Config.nosecurity) {
+    // Auth0 configuration
+    requiredConfigSettings.push('auth0ClientID', 'auth0ClientSecret', 'auth0Domain', 'sessionSecret');
+}
+
+for (const required of requiredConfigSettings) {
     if (!Config[required]) {
         throw new Error(`You must specify "${required}" in the configuration file (${Config.path}).`);
     }
@@ -50,16 +55,47 @@ if (SQLITE_REGEX.test(Config.storageLocation)) {
 
 const server = express();
 
-server.use(auth({
-    secret: Config.sessionSecret,
-    authRequired: false,
-    auth0Logout: true,
-    baseURL: `${Config.domain || 'http://localhost'}:${Config.port}`,
-    clientID: Config.auth0ClientID,
-    clientSecret: Config.auth0ClientSecret,
-    enableTelemetry: false,
-    issuerBaseURL: Config.auth0Domain,
-}));
+
+if (Config.nosecurity) {
+    if (!process.argv.includes('--no-security')) {
+        throw new Error(
+            'Config.nosecurity is truthy, but the --no-security command line flag was not set.\n' +
+            '(If you are testing, you probably want to run `npm start -- --no-security`, ' +
+            'and if you are in production, you need to remove `"nosecurity"` from `config.json`.)',
+        );
+    }
+
+    console.warn(`!!!!!!!!!!!!!!!!!!!!!!!!!! WARNING !!!!!!!!!!!!!!!!!!!!!!!!!!`);
+    console.warn(`!! You have disabled authentication features.              !!`);
+    console.warn(`!! This means that ANYONE with access to your server will  !!`);
+    console.warn(`!! be able to modify your data and have full permissions.  !!`);
+    console.warn(`!! This is a MAJOR SECURITY RISK; you should take steps to !!`);
+    console.warn(`!! ensure that your IP address is only accessible to you.  !!`);
+    console.warn(`!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!`);
+
+    // stub Auth0 pages
+    server.get('/login', (req, res) => res.send('`Config.nosecurity` is enabled; you cannot log in'));
+    server.get('/logout', (req, res) => res.send('`Config.nosecurity` is enabled; you cannot log out'));
+    server.get('/callback', (req, res) => res.send('`Config.nosecurity` is enabled; you cannot use the callback page'));
+} else {
+    if (process.argv.includes('--no-security')) {
+        console.warn(
+            `The --no-security flag was passed, ` +
+            `but authentication has been enabled anyway, because Config.nosecurity was not set.`,
+        );
+    }
+
+    server.use(auth({
+        secret: Config.sessionSecret,
+        authRequired: false,
+        auth0Logout: true,
+        baseURL: `${Config.domain || 'http://localhost'}:${Config.port}`,
+        clientID: Config.auth0ClientID,
+        clientSecret: Config.auth0ClientSecret,
+        enableTelemetry: false,
+        issuerBaseURL: Config.auth0Domain,
+    }));
+}
 
 server.get('/', async (req: AuthenticatedRequest, res) => {
     let html = `Hello! This is the FRC Team ${Config.teamNumber || 5940} scouting website.`;
@@ -89,4 +125,4 @@ server.get('/addmatch', accessGate('Scouter'), MatchAdd);
 // ----- End pages from other files -----
 
 // All pages are loaded, start the server!
-server.listen(Config.port, () => console.log(`Listening on http://localhost:${Config.port}`));
+server.listen(Config.port, () => console.log(`Listening on ${Config.domain || 'http://localhost'}:${Config.port}`));
