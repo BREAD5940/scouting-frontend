@@ -24,8 +24,8 @@ describe('Authority management', () => {
         expect(authManager.toUser('tobias@example.com')?.authLevelName).toEqual('Scouter');
         expect(authManager.toUser('sophie@example.com')?.authLevelName).toEqual('Team Member');
 
-        expect(authManager.toUser('random@example.com')?.authLevelName).toEqual('Unauthenticated');
-        expect(authManager.toUser('random@gmail.com')?.authLevelName).toEqual('Unauthenticated');
+        expect(authManager.toUser('random@example.com')?.authLevelName).toEqual('Unauthorized');
+        expect(authManager.toUser('random@gmail.com')?.authLevelName).toEqual('Unauthorized');
     });
 
     describe('User#atLeast', () => {
@@ -33,31 +33,31 @@ describe('Authority management', () => {
         expect(authManager.toUser('annika@example.com')!.atLeast('Developer')).toBeTruthy();
         expect(authManager.toUser('annika@example.com')!.atLeast('Scouter')).toBeTruthy();
         expect(authManager.toUser('annika@example.com')!.atLeast('Team Member')).toBeTruthy();
-        expect(authManager.toUser('annika@example.com')!.atLeast('Unauthenticated')).toBeTruthy();
+        expect(authManager.toUser('annika@example.com')!.atLeast('Unauthorized')).toBeTruthy();
 
         expect(authManager.toUser('elise@example.com')!.atLeast('System Administrator')).toBeFalsy();
         expect(authManager.toUser('elise@example.com')!.atLeast('Developer')).toBeTruthy();
         expect(authManager.toUser('elise@example.com')!.atLeast('Scouter')).toBeTruthy();
         expect(authManager.toUser('elise@example.com')!.atLeast('Team Member')).toBeTruthy();
-        expect(authManager.toUser('elise@example.com')!.atLeast('Unauthenticated')).toBeTruthy();
+        expect(authManager.toUser('elise@example.com')!.atLeast('Unauthorized')).toBeTruthy();
 
         expect(authManager.toUser('sophie@example.com')!.atLeast('System Administrator')).toBeFalsy();
         expect(authManager.toUser('sophie@example.com')!.atLeast('Developer')).toBeFalsy();
         expect(authManager.toUser('sophie@example.com')!.atLeast('Scouter')).toBeFalsy();
         expect(authManager.toUser('sophie@example.com')!.atLeast('Team Member')).toBeTruthy();
-        expect(authManager.toUser('sophie@example.com')!.atLeast('Unauthenticated')).toBeTruthy();
+        expect(authManager.toUser('sophie@example.com')!.atLeast('Unauthorized')).toBeTruthy();
 
 
         expect(authManager.toUser('tobias@example.com')!.atLeast('System Administrator')).toBeFalsy();
         expect(authManager.toUser('tobias@example.com')!.atLeast('Developer')).toBeFalsy();
         expect(authManager.toUser('tobias@example.com')!.atLeast('Scouter')).toBeTruthy();
         expect(authManager.toUser('tobias@example.com')!.atLeast('Team Member')).toBeTruthy();
-        expect(authManager.toUser('tobias@example.com')!.atLeast('Unauthenticated')).toBeTruthy();
+        expect(authManager.toUser('tobias@example.com')!.atLeast('Unauthorized')).toBeTruthy();
 
         expect(authManager.toUser('random@example.com')!.atLeast('System Administrator')).toBeFalsy();
         expect(authManager.toUser('random@example.com')!.atLeast('Developer')).toBeFalsy();
         expect(authManager.toUser('random@example.com')!.atLeast('Scouter')).toBeFalsy();
         expect(authManager.toUser('random@example.com')!.atLeast('Team Member')).toBeFalsy();
-        expect(authManager.toUser('random@example.com')!.atLeast('Unauthenticated')).toBeTruthy();
+        expect(authManager.toUser('random@example.com')!.atLeast('Unauthorized')).toBeTruthy();
     });
 });
