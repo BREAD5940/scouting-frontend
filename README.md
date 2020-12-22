@@ -7,7 +7,9 @@ A frontend to the [`frc-scouting`](https://github.com/TheAnnalyst/frc-scouting) 
 First, copy `config-example.json` to `config.json` and edit it to configure the server.
 If you are not using an Auth0 tenant of your own (if you didn't understand that, you're not using one :p), you should disable authentication.
 
-Then, run `npm start` (or `npm start -- --no-security` if you disabled authentication) to start the server!
+Then, run `npm start` (or `npm start -- --no-security` if you disabled authentication) in a shell (Terminal or Command Prompt) to start the server!
+If you encounter errors, run `npm install` to install dependencies.
+
 
 ### Disabling authentication
 Disabling authentication should ONLY EVER be done in testing environments that are not accessible to the broader internet.
