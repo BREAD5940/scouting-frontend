@@ -11,7 +11,7 @@ import {checkEmailValidity, isValidEmail} from './lib';
 import {AuthenticatedRequest} from './index';
 
 const AUTHORITY_LEVELS = {
-    0: 'Unauthenticated',
+    0: 'Unauthorized',
     10: 'Team Member',
     20: 'Scouter',
     30: 'Developer',
