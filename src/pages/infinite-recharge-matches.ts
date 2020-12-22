@@ -64,7 +64,7 @@ export async function MatchView(req: AuthenticatedRequest, res: Response) {
 
 /** Adds a match */
 export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
-    let html = await Resources.get('AddMtech.html');
+    let html = await Resources.get('AddMatch.html');
 
     if (req.query.number) {
         try {
