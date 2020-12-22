@@ -95,3 +95,16 @@ export async function readdirPromisified(path: string) {
         });
     });
 }
+
+/** async mkdir */
+export async function mkdirPromisified(path: string) {
+    return new Promise<string>((resolve, reject) => {
+        fs.mkdir(path, {recursive: true}, (err, path) => {
+            if (err) {
+                reject(err);
+            } else {
+                resolve(path);
+            }
+        });
+    });
+}

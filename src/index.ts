@@ -7,11 +7,13 @@
 import express from 'express';
 import type {Request} from 'express';
 import {auth, RequestContext} from 'express-openid-connect';
+import {existsSync} from 'fs';
+import {sep as pathSeparator} from 'path';
 import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
 
 import {ConfigLoader} from './config';
 import {AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
-import {accessGate} from './lib';
+import {accessGate, mkdirPromisified} from './lib';
 
 import {TeamAdd, TeamView} from './pages/teams';
 import {MatchAdd, MatchView} from './pages/infinite-recharge-matches';
@@ -48,9 +50,25 @@ for (const required of requiredConfigSettings) {
 }
 
 if (SQLITE_REGEX.test(Config.storageLocation)) {
-    (global as any).Backend = new SQLBackend(new InfiniteRecharge.InfiniteRechargeSQL(Config.storageLocation));
+    (global as any).Backend = new SQLBackend();
+
+    const storagePathParts = Config.storageLocation.split(pathSeparator);
+    storagePathParts.pop(); // remove DB file
+    const storageDir = storagePathParts.join(pathSeparator);
+
+    if (!existsSync(storageDir)) {
+        console.log(`The given storage directory doesn't exist, creating it...`);
+        mkdirPromisified(storageDir).then(() => {
+            (Backend as SQLBackend).registerPlan(new InfiniteRecharge.InfiniteRechargeSQL(Config.storageLocation));
+            console.log(`Storage plan initialized!`);
+        });
+    } else {
+        (Backend as SQLBackend).registerPlan(new InfiniteRecharge.InfiniteRechargeSQL(Config.storageLocation));
+        console.log(`Storage plan initialized!`);
+    }
 } else { // JSON time
     (global as any).Backend = new JSONBackend(Config.storageLocation, new InfiniteRecharge.InfiniteRechargeJSON());
+    console.log(`Storage plan initialized!`);
 }
 
 const server = express();
