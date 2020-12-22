@@ -65,15 +65,8 @@ export function TeamView(req: AuthenticatedRequest, res: Response) {
 }
 
 /** Adds a team */
-export function TeamAdd(req: AuthenticatedRequest, res: Response) {
-    let html = `<h4>Add a team</h4>` +
-    `<form action="/addteam">` +
-        `<label for="number">Team number:</label> ` +
-        `<input type="text" id="number" name="number"><br />` +
-        `<label for="matches">Matches (comma-separated):</label> ` +
-        `<input type="text" id="matches" name="matches"><br />` +
-        `<input type="submit" value="Add team">` +
-    `</form>`;
+export async function TeamAdd(req: AuthenticatedRequest, res: Response) {
+    let html = await Resources.get('AddTeam.html');
 
     if (req.query.matches !== undefined && req.query.number) {
         try {

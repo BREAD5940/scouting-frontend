@@ -11,7 +11,7 @@ import type {AuthenticatedRequest} from '../index';
 import {InfiniteRecharge} from 'frc-scouting';
 
 /** Views a match */
-export function MatchView(req: AuthenticatedRequest, res: Response) {
+export async function MatchView(req: AuthenticatedRequest, res: Response) {
     if (req.query.match) {
         let html = `<h1>Viewing match ${req.query.match}</h1>`;
 
@@ -59,55 +59,12 @@ export function MatchView(req: AuthenticatedRequest, res: Response) {
         return res.send(html);
     }
 
-    return res.send(
-        `<h1>View info about a match!</h1>` +
-        `<form action="/viewmatch">` +
-            `<label for="match">Match number:</label> <input type="text" id="match" name="match"><br />` +
-            `<input type="submit" value="View!">` +
-        `</form>`,
-    );
+    return res.send(await Resources.get('ViewMatch.html'));
 }
 
 /** Adds a match */
-export function MatchAdd(req: AuthenticatedRequest, res: Response) {
-    let html = `<h3>Add a match</h3>` +
-    `<form action="/addmatch">` +
-        `<label for="number">Match number:</label> <input type="text" id="number" name="number"><br />` +
-        `<label for="teamnumber">Team number:</label> <input type="text" id="teamnumber" name="teamnumber"><br />` +
-
-        `<label for="alliance">Alliance</label> <select id="alliance" name="alliance">` +
-            `<option value="red">Red</option>` +
-            `<option value="blue">Blue</option>` +
-        `</select><br />` +
-
-        `<label for="colorwheelstate">Color Wheel</label> <select id="colorwheelstate" name="colorwheelstate">` +
-            `<option value="null">Not utilized</option>` +
-            `<option value="atcolor">Rotated to a specific color</option>` +
-            `<option value="rotated">Rotated a certain number of times</option>` +
-        `</select><br />` +
-
-        `Power cells scored in auto: ` +
-            `<label for="lowpcauto">Low goal:</label> <input type="text" id="lowpcauto" name="lowpcauto"> ` +
-            `<label for="innerpcauto">Inner goal:</label> <input type="text" id="innerpcauto" name="innerpcauto"> ` +
-            `<label for="outerpcauto">Outer goal:</label> <input type="text" id="outerpcauto" name="outerpcauto"> ` +
-        `<br />` +
-        `Power cells scored in teleop: ` +
-            `<label for="lowpcteleop">Low goal:</label> <input type="text" id="lowpcteleop" name="lowpcteleop"> ` +
-            `<label for="innerpcteleop">Inner goal:</label> ` +
-                `<input type="text" id="innerpcteleop" name="innerpcteleop"> ` +
-            `<label for="outerpcteleop">Outer goal:</label> ` +
-                `<input type="text" id="outerpcteleop" name="outerpcteleop"> ` +
-        `<br />` +
-
-        `<label for="hangingbots">Bots hanging from the shield generator:</label> ` +
-            `<input type="text" id="hangingbots" name="hangingbots"><br />` +
-        `<label for="floorbots">Bots on the floor under the shield generator:</label> ` +
-            `<input type="text" id="floorbots" name="floorbots"><br />` +
-        `<label for="shieldislevel">Is the Shield Generator level?</label> ` +
-            `<input type="checkbox" id="shieldislevel" name="shieldislevel" value="true"><br />` +
-
-        `<input type="submit" value="Add match">` +
-    `</form>`;
+export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
+    let html = await Resources.get('AddMtech.html');
 
     if (req.query.number) {
         try {

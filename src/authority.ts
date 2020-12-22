@@ -124,17 +124,9 @@ export class User {
 }
 
 /** authority info */
-export function AuthorityViewingAPI(req: AuthenticatedRequest, res: Response) {
+export async function AuthorityViewingAPI(req: AuthenticatedRequest, res: Response) {
     if (!req.query.email) {
-        return res.send(
-            `<a href="/getauthority?email=me"><button>Get your own authority level</button></a>` +
-            `<hr />` +
-            `<h4>Get authority level for an email</h4>` +
-            `<form action="/getauthority">` +
-                `<label for="email">Email address:</label> <input type="text" id="email" name="email"><br />` +
-                `<input type="submit" value="Submit">` +
-            `</form>`,
-        );
+        return res.send(await Resources.get('ViewAuthority.html'));
     }
 
     const email = req.query.email === 'me' ? req.oidc?.user?.email || 'none': req.query.email.toString();

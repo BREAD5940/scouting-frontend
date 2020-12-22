@@ -15,20 +15,24 @@ import {accessGate} from './lib';
 
 import {TeamAdd, TeamView} from './pages/teams';
 import {MatchAdd, MatchView} from './pages/infinite-recharge-matches';
+import {ResourceManager} from './lib/resources';
 
 export type AuthenticatedRequest = Request & {oidc?: RequestContext & {user?: any & {name?: string, email?: string}}};
 
 const CONFIG_PATH = `${__dirname}/../config.json`;
 const AUTHORITY_PATH = `${__dirname}/../authority.json`;
+const RESOURCES_PATH = `${__dirname}/../resources`;
 const SQLITE_REGEX = /\.(db|sql(ite3?)?)$/;
 declare global {
-    const Config: ConfigLoader;
-    const Backend: StorageBackend;
     const AuthManager: AuthorityManager;
+    const Backend: StorageBackend;
+    const Config: ConfigLoader;
+    const Resources: ResourceManager;
 }
 
 (global as any).Config = new ConfigLoader(CONFIG_PATH);
 (global as any).AuthManager = new AuthorityManager(AUTHORITY_PATH);
+(global as any).Resources = new ResourceManager(RESOURCES_PATH);
 
 for (
     const required of ['storageLocation', 'port', 'auth0ClientID', 'auth0ClientSecret', 'auth0Domain', 'sessionSecret']
