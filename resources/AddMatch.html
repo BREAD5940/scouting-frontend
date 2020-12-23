@@ -8,39 +8,80 @@
   </head>
 
   <body>
-    <h3>Add a match</h3>
+    <div class="content-container">
+      <h3 id="addmatch-title">Add a match</h3>
 
-    <form action="/addmatch">
-        <label for="number">Match number:</label> <input type="text" id="number" name="number">
-        <br />
-        <label for="teamnumber">Team number:</label> <input type="text" id="teamnumber" name="teamnumber">
-        <br />
-        <label for="alliance">Alliance</label> <select id="alliance" name="alliance">
-            <option value="red">Red</option>
-            <option value="blue">Blue</option>
-        </select>
-        <br />
-        <label for="colorwheelstate">Color Wheel</label> <select id="colorwheelstate" name="colorwheelstate">
-            <option value="null">Not utilized</option>
-            <option value="atcolor">Rotated to a specific color</option>
-            <option value="rotated">Rotated a certain number of times</option>
-        </select>
-        <br />
-        Power cells scored in auto: <label for="lowpcauto">Low goal:</label> <input type="text" id="lowpcauto" name="lowpcauto">
-        <label for="innerpcauto">Inner goal:</label> <input type="text" id="innerpcauto" name="innerpcauto">
-        <label for="outerpcauto">Outer goal:</label> <input type="text" id="outerpcauto" name="outerpcauto">
-        <br />
-        Power cells scored in teleop: <label for="lowpcteleop">Low goal:</label> <input type="text" id="lowpcteleop" name="lowpcteleop">
-        <label for="innerpcteleop">Inner goal:</label> <input type="text" id="innerpcteleop" name="innerpcteleop">
-        <label for="outerpcteleop">Outer goal:</label> <input type="text" id="outerpcteleop" name="outerpcteleop">
-        <br />
-        <label for="hangingbots">Bots hanging from the shield generator:</label> <input type="text" id="hangingbots" name="hangingbots">
-        <br />
-        <label for="floorbots">Bots on the floor under the shield generator:</label> <input type="text" id="floorbots" name="floorbots">
-        <br />
-        <label for="shieldislevel">Is the Shield Generator level?</label> <input type="checkbox" id="shieldislevel" name="shieldislevel" value="true">
-        <br />
-        <input type="submit" value="Add match">
-    </form>
+      <form action="/addmatch">
+
+          <div class="team-teamnumber-div">
+            <div class="number-div">
+              <label for="number">Match number:</label> <input type="text" id="number" name="number" placeholder="Match Number">
+            </div>
+            <div class="teamnumber-div">
+              <label for="teamnumber">Team number:</label>  <input type="text" id="teamnumber" name="teamnumber" placeholder="Team Number">
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="color-wheel-div">
+            <div class="color-div">
+              <label for="alliance">Alliance</label> <select id="alliance" name="alliance">
+                  <option value="red">Red</option>
+                  <option value="blue">Blue</option>
+              </select>
+            </div>
+            <div class="wheel-div">
+              <label for="colorwheelstate">Color Wheel</label> <select id="colorwheelstate" name="colorwheelstate">
+                  <option value="null">Not utilized</option>
+                  <option value="atcolor">Rotated to a specific color</option>
+                  <option value="rotated">Rotated a certain number of times</option>
+              </select>
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="scored-balls-div">
+            <div class="scored-balls-label">
+              Power cells scored in auto:
+            </div>
+            <div class="scored-balls-inputs">
+              <input type="text" id="lowpcauto" name="lowpcauto" placeholder="Low Goal" class="low-goal">
+              <input type="text" id="innerpcauto" name="innerpcauto" placeholder="Inner Goal" class="inner-goal">
+              <input type="text" id="outerpcauto" name="outerpcauto" placeholder="Outer Goal" class="high-goal">
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="scored-balls-div">
+            <div class="scored-balls-label">
+              Power cells scored in teleop:
+            </div>
+            <div class="scored-balls-inputs">
+              <input type="text" id="lowpcteleop" name="lowpcteleop" placeholder="Low Goal" class="low-goal">
+              <input type="text" id="innerpcteleop" name="innerpcteleop" placeholder="Inner Goal" class="inner-goal">
+              <input type="text" id="outerpcteleop" name="outerpcteleop" placeholder="Outer Goal" class="high-goal">
+              <div class="clearfix"></div>
+            </div>
+          </div>
+
+          <div class="hanging-bots-div">
+            <div class="hanging-div">
+              <label for="hangingbots">Bots hanging from the shield generator:</label> <input type="text" id="hangingbots" name="hangingbots" placeholder="Bots hanging from the shield generator">
+            </div>
+            <div class="floor-div">
+              <label for="floorbots">Bots on the floor under the shield generator:</label> <input type="text" id="floorbots" name="floorbots" placeholder="Bots on the floor under the shield generator">
+            </div>
+            <div class="clearfix"></div>
+          </div>
+
+          <div class="level-shield-div">
+            <label for="shieldislevel">Is the Shield Generator level?</label> <input type="checkbox" id="shieldislevel" name="shieldislevel" value="true">
+          </div>
+
+          <input type="submit" value="Add match">
+      </form>
+    </div>
+
+    <script> </script>
   </body>
 </html>

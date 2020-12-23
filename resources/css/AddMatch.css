@@ -1,4 +1,200 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+/* Reset margins/padding */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add the root element styles */
+:root {
+  font-size: 16px;
+  font-family: 'Rubik', sans-serif;
+  color: black;
+}
+
 /* Add the body styles */
 body {
-  background-color: red;
+  background-color: #475978;
+}
+
+/* Clearfix */
+.clearfix {
+  clear: both;
+}
+
+/* Style the content container */
+.content-container {
+  width: 90;
+  margin: 5vw;
+  background-color: white;
+  min-height: calc(100vh - 10vw);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  padding: 50px 10% 35px 10%;
+  box-sizing: border-box;
+}
+
+/* Style the title */
+.content-container #addmatch-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  padding-bottom: 20px;
+  margin-bottom: 45px;
+  border-bottom: 1px solid black;
+  color: #475978;
+}
+
+/* Style the alliance team teamnumber section */
+.content-container .team-teamnumber-div {
+  width: 100%;
+  margin-bottom: 25px
+}
+
+.content-container .team-teamnumber-div label {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.content-container .team-teamnumber-div input {
+  width: 100%;
+  padding: 15px 10px;
+  font-family: 'Rubik', sans-serif;
+  box-sizing: border-box;
+}
+
+.content-container .team-teamnumber-div .number-div,  .content-container .team-teamnumber-div .teamnumber-div {
+  float: left;
+  width: calc(50% - 10px);
+}
+
+.content-container .team-teamnumber-div .number-div {
+  margin-right: 10px;
+}
+
+.content-container .team-teamnumber-div .teamnumber-div {
+  margin-left: 10px;
+}
+
+
+
+/* Style ther color wheel form section */
+.content-container .color-wheel-div {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.content-container .color-wheel-div label {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.content-container .color-wheel-div select {
+  width: 100%;
+  padding: 15px 10px;
+  font-family: 'Rubik', sans-serif;
+  box-sizing: border-box;
+}
+
+.content-container .color-wheel-div .color-div,  .content-container .color-wheel-div .wheel-div {
+  float: left;
+  width: calc(50% - 10px);
+}
+
+.content-container .color-wheel-div .color-div {
+  margin-right: 10px;
+}
+
+.content-container .color-wheel-div .wheel-div {
+  margin-left: 10px;
+}
+
+/* Style the scored balls form section */
+.content-container .scored-balls-div {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.content-container .scored-balls-div .scored-balls-label {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.content-container .scored-balls-div .scored-balls-inputs input {
+  padding: 15px 10px;
+  font-family: 'Rubik', sans-serif;
+  box-sizing: border-box;
+  float: left;
+  width: calc(33.333% - 7.5px);
+}
+
+.content-container .scored-balls-div .scored-balls-inputs .low-goal {
+  margin-right: 7.5px
+}
+
+.content-container .scored-balls-div .scored-balls-inputs .inner-goal {
+  margin: 0px 3.75px;
+}
+
+.content-container .scored-balls-div .scored-balls-inputs .high-goal {
+  margin-left: 7.5px;
+}
+
+/* Style the hanging bots form section */
+.content-container .hanging-bots-div {
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+.content-container .hanging-bots-div .hanging-div, .content-container .hanging-bots-div .floor-div {
+  width: calc(50% - 10px);
+  float: left;
+}
+
+.content-container .hanging-bots-div label {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.content-container .hanging-bots-div input {
+  width: 100%;
+  padding: 15px 10px;
+  font-family: 'Rubik', sans-serif;
+  box-sizing: border-box;
+}
+
+.content-container .hanging-bots-div .hanging-div {
+  margin-right: 10px;
+}
+
+.content-container .hanging-bots-div .floor-div {
+  margin-left: 10px;
+}
+
+/* Style the level shield fom section */
+.content-container .level-shield-div {
+  font-size: 0.8rem;
+  font-weight: bold;
+  width: 100%;
+  margin-bottom: 25px;
+}
+
+/* Style the match submit button form section */
+.content-container input[type="submit"] {
+  width: 100%;
+  margin-bottom: 25px;
+  padding: 15px 10px;
+  font-size: 0.9em;
+  font-family: 'Rubik', sans-serif;
+  color: white;
+  background-color: #475978;
+  border: none;
+  border-radius: 3px;
+  transition: 250ms;
+}
+
+.content-container input[type="submit"]:hover {
+  cursor: pointer;
+  background-color: #222E42;
 }
