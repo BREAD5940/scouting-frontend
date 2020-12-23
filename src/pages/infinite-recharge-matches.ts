@@ -16,7 +16,16 @@ export async function MatchView(req: AuthenticatedRequest, res: Response) {
         let html = `<h1>Viewing match ${req.query.match}</h1>`;
 
         const num = parseInt(req.query.match.toString());
-        const match = Backend.getMatchByNumber(num) as InfiniteRecharge.InfiniteRechargeMatch | null;
+
+
+        let match: InfiniteRecharge.InfiniteRechargeMatch | null;
+
+        try {
+            match = Backend.getMatchByNumber(num) as InfiniteRecharge.InfiniteRechargeMatch | null;
+        } catch (err) {
+            html += err.toString();
+            return res.send(html);
+        }
 
         if (!match) {
             html += `There is no match numbered ${num} in the database.`;
@@ -94,7 +103,7 @@ export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
             }
 
             const colorWheel = new InfiniteRecharge.ColorWheel(colorWheelState);
-            const powerCells =new InfiniteRecharge.PowerCellTracker({
+            const powerCells = new InfiniteRecharge.PowerCellTracker({
                 LOW: {
                     auto: parseInt(req.query.lowpcauto?.toString() || ''),
                     teleop: parseInt(req.query.lowpcteleop?.toString() || ''),
