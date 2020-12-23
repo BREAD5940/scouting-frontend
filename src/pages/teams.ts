@@ -68,14 +68,15 @@ export function TeamView(req: AuthenticatedRequest, res: Response) {
 export async function TeamAdd(req: AuthenticatedRequest, res: Response) {
     let html = await Resources.get('AddTeam.html');
 
-    if (req.query.matches !== undefined && req.query.number) {
+    if (req.query.number) {
         try {
             const teamNumber = parseInt(req.query.number.toString());
             if (isNaN(teamNumber) || teamNumber < 1) throw new Error(`${req.query.number} is not a valid team number`);
 
-            const matches = req.query.matches
+            const matches = (req.query.matches || [])
                 .toString()
                 .split(',')
+                .filter(Boolean)
                 .map((num) => {
                     const result = parseInt(num);
                     if (isNaN(result) || result < 1) throw new Error(`${num} is not a valid match number`);
@@ -93,7 +94,7 @@ export async function TeamAdd(req: AuthenticatedRequest, res: Response) {
             return res.send(html);
         }
 
-        html += `<br /><h4>Added a new team (#${req.query.number})`;
+        html += `<br /><h4>Added a new team (<a href="/viewteam?number=${req.query.number}">#${req.query.number}</a>)!`;
     }
 
     return res.send(html);
