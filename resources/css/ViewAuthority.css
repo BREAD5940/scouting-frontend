@@ -12,6 +12,7 @@
   font-size: 16px;
   font-family: 'Rubik', sans-serif;
   color: black;
+  --bottom-margin: 25px;
 }
 
 /* Add the body styles */
@@ -47,7 +48,7 @@ body {
 /* Style the label input form sections */
 .content-container .label-input-div {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: var(--bottom-margin);;
 }
 
 .content-container .label-input-div label {
@@ -94,4 +95,18 @@ body {
 .content-container .getauthority-submit:hover {
   cursor: pointer;
   background-color: #1F4D2B;
+}
+
+/* Media Queries */
+@Media (max-width: 800px) {
+  /* Root element */
+  :root {
+    font-size: 13.5px;
+  }
+
+  /* Content Container */
+  .content-container {
+    width: 90vw;
+  }
+
 }

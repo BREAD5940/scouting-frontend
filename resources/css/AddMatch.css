@@ -12,6 +12,7 @@
   font-size: 16px;
   font-family: 'Rubik', sans-serif;
   color: black;
+  --bottom-margin: 25px;
 }
 
 /* Add the body styles */
@@ -49,7 +50,7 @@ body {
 /* Style the alliance team teamnumber section */
 .content-container .team-teamnumber-div {
   width: 100%;
-  margin-bottom: 25px
+  margin-bottom: var(--bottom-margin);
 }
 
 .content-container .team-teamnumber-div label {
@@ -78,11 +79,10 @@ body {
 }
 
 
-
 /* Style ther color wheel form section */
 .content-container .color-wheel-div {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: var(--bottom-margin);;
 }
 
 .content-container .color-wheel-div label {
@@ -113,7 +113,7 @@ body {
 /* Style the scored balls form section */
 .content-container .scored-balls-div {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: var(--bottom-margin);;
 }
 
 .content-container .scored-balls-div .scored-balls-label {
@@ -144,7 +144,7 @@ body {
 /* Style the hanging bots form section */
 .content-container .hanging-bots-div {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: var(--bottom-margin);;
 }
 
 .content-container .hanging-bots-div .hanging-div, .content-container .hanging-bots-div .floor-div {
@@ -172,18 +172,18 @@ body {
   margin-left: 10px;
 }
 
-/* Style the level shield fom section */
+/* Style the level shield form section */
 .content-container .level-shield-div {
   font-size: 0.8rem;
   font-weight: bold;
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: var(--bottom-margin);;
 }
 
 /* Style the match submit button form section */
 .content-container input[type="submit"] {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: var(--bottom-margin);;
   padding: 15px 10px;
   font-size: 0.9em;
   font-family: 'Rubik', sans-serif;
@@ -197,4 +197,86 @@ body {
 .content-container input[type="submit"]:hover {
   cursor: pointer;
   background-color: #222E42;
+}
+
+/* Media queries */
+/* Media Queries */
+@media (max-width: 800px) {
+
+  /* Hanging bots form section */
+  .content-container .hanging-bots-div .hanging-div, .content-container .hanging-bots-div .floor-div {
+    float: none;
+  }
+
+  .content-container .hanging-bots-div .hanging-div {
+    width: 100%;
+    margin-left: 0px;
+    margin-bottom: 20px;
+  }
+
+  .content-container .hanging-bots-div .floor-div {
+    width: 100%;
+    margin-left: 0px;
+    margin-bottom: 20px;
+  }
+
+}
+
+@media (max-width: 500px) {
+  /* Root styles */
+  :root {
+    font-size: 13.5px;
+    --bottom-margin: 17.5px;
+  }
+
+  /* Alliance team number section */
+  .content-container .team-teamnumber-div .number-div,  .content-container .team-teamnumber-div .teamnumber-div {
+    float: none;
+    width: 100%;
+  }
+
+  .content-container .team-teamnumber-div .number-div {
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+
+  .content-container .team-teamnumber-div .teamnumber-div {
+    margin-left: 0px;
+  }
+
+  /* Color wheel form section */
+  .content-container .color-wheel-div .color-div,  .content-container .color-wheel-div .wheel-div {
+    float: none;
+    width: 100%;
+  }
+
+  .content-container .color-wheel-div .color-div {
+    margin-right: 0px;
+    margin-bottom: 20px;
+  }
+
+  .content-container .color-wheel-div .wheel-div {
+    margin-left: 0px;
+  }
+
+  /* Scored balls section */
+  .content-container .scored-balls-div .scored-balls-inputs input {
+    float: none;
+    width: 100%;
+  }
+
+  .content-container .scored-balls-div .scored-balls-inputs .low-goal {
+    margin-right: 0px;
+    margin-bottom: 5px
+  }
+
+  .content-container .scored-balls-div .scored-balls-inputs .inner-goal {
+    margin: 0px;
+    margin-bottom: 5px;
+  }
+
+  .content-container .scored-balls-div .scored-balls-inputs .high-goal {
+    margin-left: 0px;
+  }
+
 }

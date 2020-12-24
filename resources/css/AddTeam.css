@@ -12,6 +12,7 @@
   font-size: 16px;
   font-family: 'Rubik', sans-serif;
   color: black;
+  --bottom-margin: 25px;
 }
 
 /* Add the body styles */
@@ -58,7 +59,7 @@ body {
 /* Style the label input form sections */
 .content-container .label-input-div {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: var(--bottom-margin);;
 }
 
 .content-container .label-input-div label {
@@ -76,7 +77,7 @@ body {
 /* Style the addteam submit button */
 .content-container input[type="submit"] {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: var(--bottom-margin);;
   padding: 15px 10px;
   font-size: 0.9em;
   font-family: 'Rubik', sans-serif;
@@ -90,4 +91,20 @@ body {
 .content-container input[type="submit"]:hover {
   cursor: pointer;
   background-color: #222E42;
+}
+
+/* Media Queries */
+@media (max-width: 800px) {
+  
+  /* Content Container */
+  .content-container {
+    position: absolute;
+    width: 86vw;
+    min-height: 0;
+    margin: 0;
+    min-height: none;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+  }
 }
