@@ -19,38 +19,27 @@ body {
   background-color: #475978;
 }
 
-/* Clearfix */
-.clearfix {
-  clear: both;
-}
-
 /* Style the content container */
 .content-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 86vw;
-  margin: 7vw;
+  position: absolute;
+  width: 60vw;
   background-color: white;
-  min-height: calc(100vh - 14vw);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
-  padding: 50px 10% 35px 10%;
+  padding: 40px;
   box-sizing: border-box;
 }
 
-/* Position the content in the middle of the content container */
-.content-container .content-container-position {
-  width: 100%;
-
-}
-
 /* Style the title */
-.content-container #addteam-title {
+.content-container #viewauthority-title {
   text-align: center;
   text-transform: uppercase;
   font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: 35px;
   padding-bottom: 20px;
-  margin-bottom: 45px;
   border-bottom: 1px solid #475978;
   color: #475978;
 }
@@ -73,21 +62,36 @@ body {
   box-sizing: border-box;
 }
 
-/* Style the addteam submit button */
-.content-container input[type="submit"] {
+/* Style the submit buttons */
+.content-container .submit {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   padding: 15px 10px;
   font-size: 0.9em;
   font-family: 'Rubik', sans-serif;
   color: white;
-  background-color: #475978;
   border: none;
   border-radius: 3px;
   transition: 250ms;
 }
 
-.content-container input[type="submit"]:hover {
+/* Style the email submit button */
+.content-container .emailauthority-submit {
+  background-color: #475978;
+  margin-bottom: 20px;
+}
+
+.content-container .emailauthority-submit:hover {
   cursor: pointer;
   background-color: #222E42;
+}
+
+/* Style the get authority submit button */
+.content-container .getauthority-submit {
+  background-color: #57C373;
+}
+
+.content-container .getauthority-submit:hover {
+  cursor: pointer;
+  background-color: #1F4D2B;
 }

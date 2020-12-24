@@ -19,43 +19,32 @@ body {
   background-color: #475978;
 }
 
-/* Clearfix */
-.clearfix {
-  clear: both;
-}
-
 /* Style the content container */
 .content-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 86vw;
-  margin: 7vw;
+  position: absolute;
+  width: 60vw;
   background-color: white;
-  min-height: calc(100vh - 14vw);
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
   box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
-  padding: 50px 10% 35px 10%;
+  padding: 40px;
   box-sizing: border-box;
 }
 
-/* Position the content in the middle of the content container */
-.content-container .content-container-position {
-  width: 100%;
-
-}
-
 /* Style the title */
-.content-container #addteam-title {
+.content-container #viewmatch-title {
   text-align: center;
   text-transform: uppercase;
   font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: 35px;
   padding-bottom: 20px;
-  margin-bottom: 45px;
   border-bottom: 1px solid #475978;
   color: #475978;
 }
 
-/* Style the label input form sections */
+/* Style the label input sections */
 .content-container .label-input-div {
   width: 100%;
   margin-bottom: 25px;
@@ -73,10 +62,10 @@ body {
   box-sizing: border-box;
 }
 
-/* Style the addteam submit button */
+/* Style the submit button */
 .content-container input[type="submit"] {
   width: 100%;
-  margin-bottom: 25px;
+  margin-bottom: 10px;
   padding: 15px 10px;
   font-size: 0.9em;
   font-family: 'Rubik', sans-serif;

@@ -7,15 +7,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Scouting App | View Match</title>
+    <link rel="stylesheet" href="/css/ViewMatch.css">
   <head>
 
   <body>
-    <h1>View info about a match!</h1>
-    <form action="/viewmatch">
-        <label for="match">Match number:</label>
-        <input type="text" id="match" name="match">
-        <br />
-        <input type="submit" value="View!">
-    </form>
+    <div class="content-container">
+      <h1 id="viewmatch-title">View Match Info</h1>
+      <form action="/viewmatch">
+          <div class="label-input-div">
+            <label for="match">Match number:</label>
+            <input type="text" id="match" name="match" placeholder="Match number">
+          </div>
+          <input type="submit" value="View!">
+      </form>
+    </div>
+
+    <script> </script>
   </body>
 </html>
