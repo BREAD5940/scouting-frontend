@@ -1,10 +1,30 @@
 <!-- Landing page for viewing authority -->
 <!-- See src/authority.ts:129 -->
 
-<a href="/getauthority?email=me"><button>Get your own authority level</button></a>
-<hr />
-<h4>Get authority level for an email</h4>
-<form action="/getauthority">
-    <label for="email">Email address:</label> <input type="text" id="email" name="email"><br />
-    <input type="submit" value="Submit">
-</form>
+<!DOCTYPE html>
+
+<html>
+
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scouting App | Get Authority</title>
+    <link rel="stylesheet" href="/css/ViewAuthority.css">
+  </head>
+
+  <body>
+    <div class="content-container">
+      <h4 id="viewauthority-title">Get authority level for an email</h4>
+      <form action="/getauthority">
+          <div class="label-input-div">
+            <label for="email">Email address:</label> <input type="text" id="email" name="email"><br />
+          </div>
+          <input class="emailauthority-submit submit" type="submit" value="Submit" placeholder="Email">
+      </form>
+      <a href="/getauthority?email=me"><button class="getauthority-submit submit">Get your own authority level</button></a>
+    </div>
+
+    <script> </script> <!-- This is line is here to prevent the pageload animation bug in chrome -->
+  </body>
+
+</html>

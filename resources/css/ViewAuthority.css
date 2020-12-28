@@ -1,0 +1,112 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+/* Reset margins/padding */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add the root element styles */
+:root {
+  font-size: 16px;
+  font-family: 'Rubik', sans-serif;
+  color: black;
+  --bottom-margin: 25px;
+}
+
+/* Add the body styles */
+body {
+  background-color: #475978;
+}
+
+/* Style the content container */
+.content-container {
+  position: absolute;
+  width: 60vw;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Style the title */
+.content-container #viewauthority-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: 35px;
+  padding-bottom: 20px;
+  border-bottom: 1px solid #475978;
+  color: #475978;
+}
+
+/* Style the label input form sections */
+.content-container .label-input-div {
+  width: 100%;
+  margin-bottom: var(--bottom-margin);;
+}
+
+.content-container .label-input-div label {
+  font-size: 0.8rem;
+  font-weight: bold;
+}
+
+.content-container .label-input-div input {
+  width: 100%;
+  padding: 15px 10px;
+  font-family: 'Rubik', sans-serif;
+  box-sizing: border-box;
+}
+
+/* Style the submit buttons */
+.content-container .submit {
+  width: 100%;
+  margin-bottom: 10px;
+  padding: 15px 10px;
+  font-size: 0.9em;
+  font-family: 'Rubik', sans-serif;
+  color: white;
+  border: none;
+  border-radius: 3px;
+  transition: 250ms;
+}
+
+/* Style the email submit button */
+.content-container .emailauthority-submit {
+  background-color: #475978;
+  margin-bottom: 20px;
+}
+
+.content-container .emailauthority-submit:hover {
+  cursor: pointer;
+  background-color: #222E42;
+}
+
+/* Style the get authority submit button */
+.content-container .getauthority-submit {
+  background-color: #57C373;
+}
+
+.content-container .getauthority-submit:hover {
+  cursor: pointer;
+  background-color: #1F4D2B;
+}
+
+/* Media Queries */
+@Media (max-width: 800px) {
+  /* Root element */
+  :root {
+    font-size: 13.5px;
+  }
+
+  /* Content Container */
+  .content-container {
+    width: 90vw;
+  }
+
+}
