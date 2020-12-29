@@ -25,8 +25,6 @@ export async function MatchView(req: AuthenticatedRequest, res: Response) {
 
 /** Adds a match */
 export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
-    let html = await Resources.get('AddMatch.html');
-
     if (req.query.number) {
         try {
             const matchNumber = parseInt(req.query.number.toString());
@@ -98,12 +96,13 @@ export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
 
             Backend.saveMatch(match);
         } catch (err) {
-            html += `<br /><h3>Error saving match: ${err}</h3>`;
-            return res.send(html);
+            return res.send(`<br /><h3>Error saving match: ${err}</h3>`);
         }
 
-        html += `<br /><h4>Added a new match (<a href="/viewmatch?match=${req.query.number}">#${req.query.number}</a>)`;
+        return res.send(
+            `<h4>Added a new match (<a href="/viewmatch?match=${req.query.number}">#${req.query.number}</a>)`,
+        );
     }
 
-    return res.send(html);
+    return res.send(await Resources.get('AddMatch.html'));
 }
