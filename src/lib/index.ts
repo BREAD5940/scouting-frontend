@@ -7,6 +7,7 @@
 import type {NextFunction, Response} from 'express';
 import type {AuthenticatedRequest} from '..';
 
+import sanitizeHTML from 'sanitize-html';
 import * as fs from 'fs';
 
 // Source: http://www.emailregex.com/
@@ -41,6 +42,15 @@ export function normalizePropertyName(name: string) {
         NORMALIZE_REGEX,
         (match, uppercase) => match.replace(uppercase, ` ${uppercase.toLowerCase()}`),
     ).trim();
+}
+
+/**
+ * Sanitizes HTML
+ */
+export function sanitize(raw: string) {
+    return sanitizeHTML(raw, {
+        selfClosing: ['input'],
+    });
 }
 
 /**

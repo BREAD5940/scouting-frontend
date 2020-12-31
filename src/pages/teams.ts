@@ -9,59 +9,18 @@ import {InfiniteRecharge, Team} from 'frc-scouting';
 
 import {normalizePropertyName} from '../lib';
 import type {AuthenticatedRequest} from '..';
+import {displayTeam, teamViewForm} from '../templates/team';
 
 /** Views a team */
 export function TeamView(req: AuthenticatedRequest, res: Response) {
     if (req.query.team) {
-        let html = `<h1>Viewing team ${req.query.team}</h1>`;
-
         const num = parseInt(req.query.team.toString());
         const team = Backend.getTeam(num);
 
-        if (!team) {
-            html += `There is no team numbered ${num} in the database.`;
-        } else {
-            html += `<h3>Team ${num}:</h3>`;
-            html += `Mean points: ${team.getMean('points')}`;
-            html += `<br />`;
-
-            if (req.query.stat) {
-                const stat = req.query.stat.toString();
-                try {
-                    html += `Mean ${normalizePropertyName(stat)}: `;
-                    html += team.getMean(stat as keyof InfiniteRecharge.InfiniteRechargeMatch);
-                } catch (e) {
-                    html += `Invalid stat: '${stat}'`;
-                }
-                html += `<br />`;
-            }
-
-            html += `<details><summary><strong>Matches</strong></summary><ul>`;
-            html += team.matches
-                .map((match) => `<li><a href="/viewmatch?match=${match.number}">Match ${match.number}</a></li>`)
-                .join('');
-            html += `</ul></details>`;
-        }
-
-        return res.send(html);
+        return res.send(displayTeam(num, req.query.stat?.toString(), team));
     }
 
-    const dummyMatch = new InfiniteRecharge.InfiniteRechargeMatch(-1, 'dummy', -1, 'RED', {});
-
-    return res.send(
-        `<h1>View info about a team!</h1>` +
-        `<form action="/viewteam">` +
-            `<label for="team">Team number:</label> <input type="text" id="team" name="team"><br />` +
-            `<label for="stat">Statistic to view:</label> ` +
-            `<select id="stat" name="stat">` +
-                Object.keys(dummyMatch)
-                    .filter((prop) => typeof dummyMatch[prop as keyof typeof dummyMatch] === 'number')
-                    .map((prop) => `<option value="${prop}">${normalizePropertyName(prop)}</option>`)
-                    .join('') +
-            `</select><br />` +
-            `<input type="submit" value="View!">` +
-        `</form>`,
-    );
+    return res.send(teamViewForm);
 }
 
 /** Adds a team */

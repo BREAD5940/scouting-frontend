@@ -4,15 +4,16 @@
 
 import {InfiniteRecharge} from 'frc-scouting';
 import * as elements from 'typed-html';
-import sanitizeHTML from 'sanitize-html';
+
+import {sanitize} from '../lib';
 
 /** creates a match view */
 export function generateMatchView(attemptedNumber: number, match: InfiniteRecharge.InfiniteRechargeMatch | null) {
-    if (!match) return sanitizeHTML(<h1>There is no match numbered {attemptedNumber} in the database.</h1>);
+    if (!match) return sanitize(<h1>There is no match numbered {attemptedNumber} in the database.</h1>);
 
     const [powerCells, colorWheel, shield] = match.pieceTrackers;
     const totalPC = powerCells.totalCells.toString().trim();
-    const wheelState = sanitizeHTML(colorWheel.state || 'not utilized');
+    const wheelState = sanitize(colorWheel.state || 'not utilized');
     const allianceHTML = match.alliance === 'RED' ?
         <span style="color:Tomato">Red</span> :
         <span style="color:DodgerBlue">Blue</span>;
@@ -21,7 +22,7 @@ export function generateMatchView(attemptedNumber: number, match: InfiniteRechar
         <h3>Match {match.number} (Team {match.teamNumber} scouted):</h3>
         <ul>
             <li>Alliance: {allianceHTML}</li>
-            <li>Type: {sanitizeHTML(match.type)}</li>
+            <li>Type: {sanitize(match.type)}</li>
             <li>Total points scored: {match.points} <ul>
                 <li>{match.bonusPoints} bonus points</li>
                 <li>{match.pointsFromFouls} points from fouls</li>
