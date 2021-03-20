@@ -60,6 +60,7 @@ body {
   width: 100%;
   padding: 15px 10px;
   font-family: 'Rubik', sans-serif;
+  font-size: 0.8rem;
   color: black;
   box-sizing: border-box;
 }
@@ -81,4 +82,29 @@ body {
 .content-container input[type="submit"]:hover {
   cursor: pointer;
   background-color: #222E42;
+}
+
+/* Media Queries */
+@media (max-width: 625px) {
+
+  .content-container {
+    width: 85vw;
+  }
+
+  .content-container #viewteam-title {
+    font-size: 1em;
+  }
+
+  .content-container .label-input-div label {
+    font-size: 0.55rem;
+  }
+
+  .content-container .label-input-div input, .content-container .label-input-div select {
+    font-size: 0.55rem;
+  }
+
+  .content-container input[type="submit"] {
+    font-size: 0.6em;
+  }
+
 }

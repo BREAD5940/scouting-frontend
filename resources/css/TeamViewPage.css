@@ -42,7 +42,7 @@ body {
   text-transform: uppercase;
   font-size: 1.5em;
   margin-top: 20px;
-  margin-bottom: 35px;
+  margin-bottom: var(--bottom-margin);
   padding-bottom: 20px;
   border-bottom: 1px solid #475978;
   color: #475978;
@@ -50,24 +50,17 @@ body {
 
 /* Style the statistics */
 .content-container .statistics-container  {
- margin-bottom: var(--bottom-margin);
+  list-style-position: inside;
+  border-bottom: 1px solid #475978;
+  padding-bottom: var(--bottom-margin);
+  padding-left: 20px;
+  margin-bottom: 20px;
 }
 
 .content-container .stat-container {
-  width: calc(50% - 10px);
-  float: left;
-  border: 1px solid #475978;
-  border-radius: 5px;
+  display: inline-block;
   padding: 10px;
   box-sizing: border-box;
-}
-
-.content-container #stat-container-1 {
-  margin-left: 10px
-}
-
-.content-container #stat-container-2 {
-  margin-right: 10px;
 }
 
 /* Style the matches section */
@@ -97,8 +90,90 @@ body {
   margin-bottom: 5px;
   transition: 250ms;
 }
+
 .content-container .matches-container li a button:hover {
   cursor: pointer;
   background-color: #2C374A;
+
+}
+
+/* Media Queries */
+@media (max-width: 750px) {
+
+  .content-container #teamviewpage-title {
+    font-size: 1em;
+  }
+
+  .content-container .matches-label {
+    font-size: 0.6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .content-container .statistics-container {
+    font-size: 0.8rem;
+  }
+
+
+  @media (max-width: 650px) {
+
+    body {
+      padding: 40px;
+    }
+
+    .content-container {
+      width: 80vw;
+      padding: 35px;
+    }
+
+    .content-container .statistics-container  {
+      padding-left: 15px;
+    }
+
+    .content-container .matches-label {
+      font-size: 0.55rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .content-container .statistics-container {
+      font-size: 0.7rem;
+    }
+
+  }
+
+@media (max-width: 500px) {
+
+  :root {
+    --bottom-margin: 10px;
+  }
+
+  body {
+    padding: 30px;
+  }
+
+  .content-container {
+    width: 90vw;
+    padding: 25px;
+  }
+
+  .content-container .statistics-container  {
+    padding-left: 10px;
+  }
+
+  .content-container .statistics-container .stat-container {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .content-container .matches-label {
+    font-size: 0.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .content-container .statistics-container {
+    font-size: 0.6rem;
+  }
 
 }

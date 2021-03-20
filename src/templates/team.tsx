@@ -18,6 +18,7 @@ const properties = Object.keys(dummyMatch)
 export const teamViewForm = <html>
       <head>
         <link rel="stylesheet" href="css/ViewTeam.css"></link>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
       </head>
       <body>
         <div class="content-container">
@@ -44,6 +45,7 @@ export function displayTeam(num: number, stat: string | undefined, team: Team<Ma
         return <html>
           <head>
             <link rel="stylesheet" href="css/TeamNotFound.css"></link>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
           </head>
           <body>
             <div class="content-container">
@@ -77,17 +79,22 @@ export function displayTeam(num: number, stat: string | undefined, team: Team<Ma
         return <html>
           <head>
             <link rel="stylesheet" href="css/TeamViewPage.css"></link>
+            <meta name="viewport" content="width=device-width, initial-scale=1.0"></meta>
           </head>
           <body>
               <div class="content-container">
                 <h1 id="teamviewpage-title">Team {num}</h1>
-                <div class="statistics-container">
-                  <div class="stat-container" id="stat-container-2">
-                    <p class="stat">Mean points: {team.getMean('points')}</p>
-                  </div>
-                  {statHTML}
+                <ul class="statistics-container">
+                  <li>
+                    <div class="stat-container" id="stat-container-2">
+                      <p class="stat">Mean points: {team.getMean('points')}</p>
+                    </div>
+                  </li>
+                  <li>
+                    {statHTML}
+                  </li>
                   <div class="clearfix"></div>
-                </div>
+                </ul>
                 <div class="matches-container">
                   <h4 class="matches-label">Matches:</h4>
                   <ul>{

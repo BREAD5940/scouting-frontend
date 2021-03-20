@@ -42,6 +42,7 @@ body {
   height: 80%;
   width: auto;
 }
+
 .content-container .image-container img {
   max-height: 100%;
   max-width: 100%;
@@ -67,4 +68,26 @@ body {
 
 .content-container .text-container .text-content-container p {
   font-size: 14px;
+}
+
+/* Media Queries */
+@media (max-width: 400px) {
+
+  .content-container .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+    margin-top: 20%; 
+    width: auto;
+  }
+
+  .content-container .text-container .text-content-container h4 {
+    font-size: 20px;
+  }
+
+  .content-container .text-container .text-content-container p {
+    font-size: 12px;
+  }
+
 }
