@@ -1,0 +1,93 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+/* Reset margins/padding */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add the root element styles */
+:root {
+  font-size: 16px;
+  font-family: 'Rubik', sans-serif;
+  color: black;
+  --bottom-margin: 25px;
+}
+
+/* Add the body styles */
+body {
+  background-color: #475978;
+}
+
+/* Style the content container */
+.content-container {
+  position: absolute;
+  width: 80vw;
+  height: 80vh;
+  background-color: white;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.5);
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Style the image container */
+.content-container .image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 80%;
+  width: auto;
+}
+
+.content-container .image-container img {
+  max-height: 100%;
+  max-width: 100%;
+}
+
+/* Style the text container */
+.content-container .text-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 20%;
+}
+
+.content-container .text-container .text-content-container {
+  text-align: center;
+  color: #475978;
+}
+
+.content-container .text-container .text-content-container h4 {
+  font-size: 28px;
+  padding-bottom: 8px;
+}
+
+.content-container .text-container .text-content-container p {
+  font-size: 14px;
+}
+
+/* Media Queries */
+@media (max-width: 400px) {
+
+  .content-container .image-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 60%;
+    margin-top: 20%; 
+    width: auto;
+  }
+
+  .content-container .text-container .text-content-container h4 {
+    font-size: 20px;
+  }
+
+  .content-container .text-container .text-content-container p {
+    font-size: 12px;
+  }
+
+}

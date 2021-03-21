@@ -1,0 +1,179 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+/* Reset margins/padding */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+/* Add the root element styles */
+:root {
+  font-size: 16px;
+  font-family: 'Rubik', sans-serif;
+  color: black;
+  --bottom-margin: 25px;
+}
+
+body {
+  background-color: #475978;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 50px;
+}
+
+.clearfix {
+  clear: both;
+}
+
+/* Style the content container */
+.content-container {
+  background-color: #FBFCFC;
+  width: 50vw;
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6);
+  padding: 40px;
+  box-sizing: border-box;
+}
+
+/* Style the title */
+.content-container #teamviewpage-title {
+  text-align: center;
+  text-transform: uppercase;
+  font-size: 1.5em;
+  margin-top: 20px;
+  margin-bottom: var(--bottom-margin);
+  padding-bottom: 20px;
+  border-bottom: 1px solid #475978;
+  color: #475978;
+}
+
+/* Style the statistics */
+.content-container .statistics-container  {
+  list-style-position: inside;
+  border-bottom: 1px solid #475978;
+  padding-bottom: var(--bottom-margin);
+  padding-left: 20px;
+  margin-bottom: 20px;
+}
+
+.content-container .stat-container {
+  display: inline-block;
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+/* Style the matches section */
+.content-container .matches-container {
+
+}
+
+.content-container .matches-label {
+  font-size: 0.8rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.content-container .matches-container li {
+  list-style: none;
+  width: 100%;
+}
+
+.content-container .matches-container li a button {
+  width: 100%;
+  padding: 7.5px;
+  font-family: 'Rubik', sans-serif;
+  background-color: #475978;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  margin-bottom: 5px;
+  transition: 250ms;
+}
+
+.content-container .matches-container li a button:hover {
+  cursor: pointer;
+  background-color: #2C374A;
+
+}
+
+/* Media Queries */
+@media (max-width: 750px) {
+
+  .content-container #teamviewpage-title {
+    font-size: 1em;
+  }
+
+  .content-container .matches-label {
+    font-size: 0.6rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .content-container .statistics-container {
+    font-size: 0.8rem;
+  }
+
+
+  @media (max-width: 650px) {
+
+    body {
+      padding: 40px;
+    }
+
+    .content-container {
+      width: 80vw;
+      padding: 35px;
+    }
+
+    .content-container .statistics-container  {
+      padding-left: 15px;
+    }
+
+    .content-container .matches-label {
+      font-size: 0.55rem;
+      font-weight: bold;
+      margin-bottom: 10px;
+    }
+
+    .content-container .statistics-container {
+      font-size: 0.7rem;
+    }
+
+  }
+
+@media (max-width: 500px) {
+
+  :root {
+    --bottom-margin: 10px;
+  }
+
+  body {
+    padding: 30px;
+  }
+
+  .content-container {
+    width: 90vw;
+    padding: 25px;
+  }
+
+  .content-container .statistics-container  {
+    padding-left: 10px;
+  }
+
+  .content-container .statistics-container .stat-container {
+    padding-top: 5px;
+    padding-bottom: 5px;
+  }
+
+  .content-container .matches-label {
+    font-size: 0.5rem;
+    font-weight: bold;
+    margin-bottom: 10px;
+  }
+
+  .content-container .statistics-container {
+    font-size: 0.6rem;
+  }
+
+}

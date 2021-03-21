@@ -48,7 +48,7 @@ body {
 /* Style the label input sections */
 .content-container .label-input-div {
   width: 100%;
-  margin-bottom: var(--bottom-margin);;
+  margin-bottom: var(--bottom-margin);
 }
 
 .content-container .label-input-div label {
