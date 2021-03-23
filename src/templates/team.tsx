@@ -107,6 +107,5 @@ export function displayTeam(num: number, stat: string | undefined, team: Team<Ma
               <script> </script>
           </body>
         </html>;
-
     }
 }
