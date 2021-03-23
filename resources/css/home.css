@@ -1,0 +1,123 @@
+/* Font imports */
+@import url('https://fonts.googleapis.com/css2?family=Rubik:wght@300&display=swap');
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  font-size: 25px;
+}
+
+/* Add the body styles */
+body {
+  background-color: #475978;
+}
+
+/* Style the a tags */
+a {
+  text-decoration: none;
+  color: #0032DA;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* Style the logged out content */
+.logged-out-content {
+  font-family: 'Rubik', sans-serif;
+  letter-spacing: 0.05em;
+  line-height: 1.7em;
+  position: absolute;
+  padding: 50px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6);
+  background-color: #FBFCFC;
+  width: 60vw;
+}
+
+/* Style the logged in content */
+.logged-in-content {
+  font-family: 'Rubik', sans-serif;
+  letter-spacing: 0.05em;
+  line-height: 1.7em;
+  position: absolute;
+  padding: 50px;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 0 0 20px 0 rgba(0, 0, 0, 0.6);
+  background-color: #FBFCFC;
+  width: 60vw;
+}
+
+/* Style the text group */
+.logged-in-content .text-group {
+  padding-bottom: 15px;
+  border-bottom: 1px solid black;
+  margin-bottom: 15px;
+  text-align: center;
+}
+
+.logged-out-content .text-group {
+  text-align: center;
+}
+
+/* Style the buttons */
+.buttons {
+  list-style: none;
+}
+
+/* Style the a tags in the buttons */
+.buttons li {
+  font-size: 0.8rem;
+  border-radius: 5px;
+  background-color: #475978;
+  padding: 10px;
+  padding-left: 30px;
+  margin-bottom: 15px;
+  transition: background 250ms;
+}
+
+.buttons li:hover {
+  background-color: #65738D;
+}
+
+.buttons li:last-child {
+  margin-bottom: 0px;
+}
+
+.buttons a {
+  color: white;
+  text-decoration: none;
+}
+
+.buttons a:hover {
+  text-decoration: none;
+}
+
+/* Media queries */
+@media (max-width: 1060px) {
+  :root {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 600px) {
+  .content {
+    width: 90vw;
+  }
+
+  :root {
+    font-size: 12px;
+  }
+
+  .buttons li {
+    padding-left: 15px;
+  }
+}
