@@ -116,8 +116,7 @@ if (Config.nosecurity) {
 }
 
 server.get('/', async (req: AuthenticatedRequest, res) => {
-    let html = ``
-    ;
+    let html = ``;
 
     if (req.oidc?.isAuthenticated && req.oidc.user) {
       html += `<html>
