@@ -69,8 +69,6 @@ export function displayTeam(num: number, stat: string | undefined, team: Team<Ma
                 statHTML = <div class="stat-container" id="stat-container-1">
                   <p class="stat-label">Mean{`${normalizePropertyName(stat)}: ${mean}`}</p>
                 </div>;
-
-
             } catch (e) {
                 statHTML = <p class="stat">Invalid stat: '{sanitize(stat)}'</p>;
             }
@@ -107,6 +105,5 @@ export function displayTeam(num: number, stat: string | undefined, team: Team<Ma
               <script> </script>
           </body>
         </html>;
-
     }
 }

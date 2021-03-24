@@ -116,13 +116,44 @@ if (Config.nosecurity) {
 }
 
 server.get('/', async (req: AuthenticatedRequest, res) => {
-    let html = `Hello! This is the FRC Team ${Config.teamNumber || 5940} scouting website.`;
+    let html = ``;
 
     if (req.oidc?.isAuthenticated && req.oidc.user) {
-        html += `<p>You are logged in as ${(req.oidc.user as any).name || 'an unknown user'}. `;
-        html += `<a href="/logout">Log out</a></p>`;
+      html += `<html>
+        <head>
+          <title>Home</title>
+          <link rel="stylesheet" href="css/home.css">
+          <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        </head>
+        <body><div class="logged-in-content">
+          <div class="text-group">
+            Hello! This is the FRC Team ${Config.teamNumber || 5940} scouting website.
+            <p>You are logged in as ${(req.oidc.user as any).name || 'an unknown user'}. 
+            <a href="/logout">Log out</a></p>
+          </div>
+          <ul class="buttons">
+              <li><a href="/addteam"><div class="button">Add Team</div></a></li>
+              <li><a href="/addmatch"><div class="button">Add Match</div></a></li>
+              <li><a href="/viewteam"><div class="button">View Team</div></a></li>
+               <li><a href="/viewmatch"><div class="button">View Match</div></a></li>
+         </ul>
+         </div></body>
+       </html>`;
     } else {
-        html += `<p>You will need to <a href="/login">log in</a> to use this service.</p>`;
+        html += `
+        <html>
+          <head>
+            <title>Home</title>
+            <link rel="stylesheet" href="css/home.css">
+            <meta name="viewport" content="width=device-width, initial-scale=1.0">
+          </head>
+          <body><div class="logged-out-content">
+            <div class="text-group">
+              Hello! This is the FRC Team ${Config.teamNumber || 5940} scouting website.
+              <p>You will need to <a href="/login">log in</a> to use this service.</p>
+            </div>
+        </div></body>
+      </html>`;
     }
 
     res.send(html);
