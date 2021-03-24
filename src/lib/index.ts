@@ -113,6 +113,7 @@ export async function mkdirPromisified(path: string) {
             if (err) {
                 reject(err);
             } else {
+                if (!path) throw new Error(`Falsy path in callback for fs#mkdir`); // should never happen
                 resolve(path);
             }
         });
