@@ -107,7 +107,7 @@ if (Config.nosecurity) {
         secret: Config.sessionSecret,
         authRequired: false,
         auth0Logout: true,
-        baseURL: `${Config.domain || 'http://localhost'}:${Config.port || Config.exposedPort}`,
+        baseURL: `${Config.domain || 'http://localhost'}:${Config.exposedPort || Config.port}`,
         clientID: Config.auth0ClientID,
         clientSecret: Config.auth0ClientSecret,
         enableTelemetry: false,
