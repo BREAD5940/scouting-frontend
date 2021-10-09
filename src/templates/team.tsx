@@ -97,8 +97,10 @@ export function displayTeam(num: number, stat: string | undefined, team: Team<Ma
                   <h4 class="matches-label">Matches:</h4>
                   <ul>{
                       team.matches
-                          .map((match) => <li><a href="/viewmatch?match={match.number}"><button>Match {match.number}</button></a></li>)
-                          .join('')
+                        .map((match) => (
+                          <li><a href={`/viewmatch?match=${match.number}`}><button>Match {match.number}</button></a></li>
+                        ))
+                        .join('')
                   }</ul>
                 </div>
               </div>
