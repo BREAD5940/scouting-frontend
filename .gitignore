@@ -113,3 +113,6 @@ package-lock.json
 config.json
 authority.json
 databases/*
+
+# misc
+.DS_Store
