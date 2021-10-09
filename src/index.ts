@@ -118,8 +118,9 @@ if (Config.nosecurity) {
 server.get('/', async (req: AuthenticatedRequest, res) => {
     let html = ``;
 
-    if (req.oidc?.isAuthenticated && req.oidc.user) {
-      html += `<html>
+    if (Config.nosecurity || (req.oidc?.isAuthenticated && req.oidc.user)) {
+        const user = Config.nosecurity ? 'a developer' : ((req.oidc!.user as any).name || 'an unknown user');
+        html += `<html>
         <head>
           <title>Home</title>
           <link rel="stylesheet" href="css/home.css">
@@ -128,7 +129,7 @@ server.get('/', async (req: AuthenticatedRequest, res) => {
         <body><div class="logged-in-content">
           <div class="text-group">
             Hello! This is the FRC Team ${Config.teamNumber || 5940} scouting website.
-            <p>You are logged in as ${(req.oidc.user as any).name || 'an unknown user'}. 
+            <p>You are logged in as ${user}.
             <a href="/logout">Log out</a></p>
           </div>
           <ul class="buttons">
