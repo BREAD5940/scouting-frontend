@@ -23,7 +23,7 @@ export class ConfigLoader {
         let contents;
         try {
             contents = readFileSync(this.path).toString();
-        } catch (err) {
+        } catch (err: any) {
             if (err.code !== 'ENOENT') throw err;
             console.warn(`The configuration file ${this.path} does not exist.`);
             console.warn(`Creating it by copying config-example.json...`);
