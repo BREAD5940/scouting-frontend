@@ -118,7 +118,7 @@ if (Config.nosecurity) {
 server.get('/', async (req: AuthenticatedRequest, res) => {
     let html = ``;
 
-    if (Config.nosecurity || (req.oidc?.isAuthenticated && req.oidc.user)) {
+    if (Config.nosecurity || (req.oidc?.isAuthenticated() && req.oidc.user)) {
         const user = Config.nosecurity ? 'a developer' : ((req.oidc!.user as any).name || 'an unknown user');
         html += `<html>
         <head>
