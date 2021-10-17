@@ -5,7 +5,13 @@ A frontend to the [`frc-scouting`](https://github.com/TheAnnalyst/frc-scouting) 
 
 ## Running
 First, copy `config-example.json` to `config.json` and edit it to configure the server.
-If you are not using an Auth0 tenant of your own (if you didn't understand that, you're not using one :p), you should disable authentication.
+If you are not using an Auth0 tenant of your own (if you didn't understand that, you're not using one :p), you should disable authentication. If you _are_ using Auth0, you'll need to configure `auth0ClientID`, `auth0ClientSecret`, `auth0Domain`, and `sessionSecret` in `config.json`. The first three can be found in the Settings tab of your Auth0 application, and the last is just a standard Express session secret (you can use node.js's `crypto#randomBytes` method to generate random data for it).
+You'll also want to create an `authority.json` file with your email:
+```json
+{
+    "myemail@domain.com": 100
+}
+```
 
 Then, run `npm start` (or `npm start -- --no-security` if you disabled authentication) in a shell (Terminal or Command Prompt) to start the server!
 If you encounter errors, run `npm install` to install dependencies.
