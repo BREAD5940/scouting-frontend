@@ -125,20 +125,11 @@ body {
   padding: 15px 10px;
   font-family: 'Rubik', sans-serif;
   box-sizing: border-box;
-  float: left;
-  width: calc(33.333% - 7.5px);
+  width: calc(33.333% - calc(15px * 5));
 }
 
-.content-container .scored-balls-div .scored-balls-inputs .low-goal {
-  margin-right: 7.5px
-}
-
-.content-container .scored-balls-div .scored-balls-inputs .inner-goal {
-  margin: 0px 3.75px;
-}
-
-.content-container .scored-balls-div .scored-balls-inputs .high-goal {
-  margin-left: 7.5px;
+.decrement-button {
+  margin-right: 15px;
 }
 
 /* Style the hanging bots form section */

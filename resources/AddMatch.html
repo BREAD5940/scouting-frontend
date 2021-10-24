@@ -46,9 +46,17 @@
               Power cells scored in auto:
             </div>
             <div class="scored-balls-inputs">
+              <button onclick="addTo('lowpcauto', 1);" class="increment-button">⬆️</button>
               <input type="text" id="lowpcauto" name="lowpcauto" placeholder="Low Goal" class="low-goal">
+              <button onclick="addTo('lowpcauto', -1);" class="decrement-button">⬇️</button>
+
+              <button onclick="addTo('innerpcauto', 1);">⬆️</button>
               <input type="text" id="innerpcauto" name="innerpcauto" placeholder="Inner Goal" class="inner-goal">
-              <input type="text" id="outerpcauto" name="outerpcauto" placeholder="Outer Goal" class="high-goal">
+              <button onclick="addTo('innerpcauto', -1);"class="decrement-button">⬇️</button>
+
+              <button onclick="addTo('outerpcauto', 1);" class="increment-button">⬆️</button>
+              <input type="text" id="outerpcauto" name="outerpcauto" placeholder="Outer Goal" class="outer-goal">
+              <button onclick="addTo('outerpcauto', -1);" class="decrement-button">⬇️</button>
               <div class="clearfix"></div>
             </div>
           </div>
@@ -58,9 +66,17 @@
               Power cells scored in teleop:
             </div>
             <div class="scored-balls-inputs">
+              <button onclick="addTo('lowpcteleop', 1);" class="increment-button">⬆️</button>
               <input type="text" id="lowpcteleop" name="lowpcteleop" placeholder="Low Goal" class="low-goal">
+              <button onclick="addTo('lowpcteleop', -1);" class="decrement-button">⬇️</button>
+
+              <button onclick="addTo('innerpcteleop', 1);">⬆️</button>
               <input type="text" id="innerpcteleop" name="innerpcteleop" placeholder="Inner Goal" class="inner-goal">
-              <input type="text" id="outerpcteleop" name="outerpcteleop" placeholder="Outer Goal" class="high-goal">
+              <button onclick="addTo('innerpcteleop', -1);"class="decrement-button">⬇️</button>
+
+              <button onclick="addTo('outerpcteleop', 1);" class="increment-button">⬆️</button>
+              <input type="text" id="outerpcteleop" name="outerpcteleop" placeholder="Outer Goal" class="outer-goal">
+              <button onclick="addTo('outerpcteleop', -1);" class="decrement-button">⬇️</button>
               <div class="clearfix"></div>
             </div>
           </div>
@@ -82,7 +98,7 @@
           <input type="submit" value="Add match">
       </form>
     </div>
-  
+
     <script> </script> <!-- This is line is here to prevent the pageload animation bug in chrome -->
   </body>
 </html>
