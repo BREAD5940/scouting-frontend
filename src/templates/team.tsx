@@ -11,7 +11,7 @@ import {normalizePropertyName, sanitize} from '../lib';
 const dummyMatch = new InfiniteRecharge.InfiniteRechargeMatch(-1, 'dummy', -1, 'RED', {});
 
 const properties = Object.keys(dummyMatch)
-    .filter((prop) => typeof dummyMatch[prop as keyof typeof dummyMatch] === 'number')
+    .filter((prop) => typeof dummyMatch[prop as keyof typeof dummyMatch] === 'number' && prop !== 'teamNumber')
     .map((prop) => <option value={prop}>{sanitize(normalizePropertyName(prop))}</option>)
     .join('');
 
