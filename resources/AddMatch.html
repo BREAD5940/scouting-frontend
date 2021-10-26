@@ -42,21 +42,28 @@
           </div>
 
           <div class="scored-balls-div">
+            <script>
+              function addTo(elem, amount) {
+                var curValue = parseInt(document.getElementById(elem).value) || 0;
+                document.getElementById(elem).value = (curValue + amount).toString();
+              }
+            </script>
+
             <div class="scored-balls-label">
               Power cells scored in auto:
             </div>
             <div class="scored-balls-inputs">
-              <button onclick="addTo('lowpcauto', 1);" class="increment-button">⬆️</button>
+              <button onclick="addTo('lowpcauto', 1);" class="increment-button" type="button">⬆️</button>
               <input type="text" id="lowpcauto" name="lowpcauto" placeholder="Low Goal" class="low-goal">
-              <button onclick="addTo('lowpcauto', -1);" class="decrement-button">⬇️</button>
+              <button onclick="addTo('lowpcauto', -1);" class="decrement-button" type="button">⬇️</button>
 
-              <button onclick="addTo('innerpcauto', 1);">⬆️</button>
+              <button onclick="addTo('innerpcauto', 1);" class="increment-button" type="button">⬆️</button>
               <input type="text" id="innerpcauto" name="innerpcauto" placeholder="Inner Goal" class="inner-goal">
-              <button onclick="addTo('innerpcauto', -1);"class="decrement-button">⬇️</button>
+              <button onclick="addTo('innerpcauto', -1);"class="decrement-button" type="button">⬇️</button>
 
-              <button onclick="addTo('outerpcauto', 1);" class="increment-button">⬆️</button>
+              <button onclick="addTo('outerpcauto', 1);" class="increment-button" type="button">⬆️</button>
               <input type="text" id="outerpcauto" name="outerpcauto" placeholder="Outer Goal" class="outer-goal">
-              <button onclick="addTo('outerpcauto', -1);" class="decrement-button">⬇️</button>
+              <button onclick="addTo('outerpcauto', -1);" class="decrement-button" type="button">⬇️</button>
               <div class="clearfix"></div>
             </div>
           </div>
