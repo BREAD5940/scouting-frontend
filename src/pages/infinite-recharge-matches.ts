@@ -15,9 +15,8 @@ import {generateMatchView} from '../templates/ir-match';
 export async function MatchView(req: AuthenticatedRequest, res: Response) {
     if (req.query.match) {
         const num = parseInt(req.query.match.toString());
-        const match = Backend.getMatchByNumber(num) as InfiniteRecharge.InfiniteRechargeMatch | null;
-
-        return res.send(generateMatchView(num, match));
+        const matches = Backend.getMatchesByNumber(num) as InfiniteRecharge.InfiniteRechargeMatch[];
+        return res.send(generateMatchView(num, matches));
     }
 
     return res.send(await Resources.get('ViewMatch.html'));

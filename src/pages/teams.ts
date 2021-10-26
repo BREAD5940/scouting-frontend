@@ -40,11 +40,12 @@ export async function TeamAdd(req: AuthenticatedRequest, res: Response) {
                     const result = parseInt(num);
                     if (isNaN(result) || result < 1) throw new Error(`${num} is not a valid match number`);
 
-                    const match = Backend.getMatchByNumber(result);
-                    if (!match) throw new Error(`No match numbered ${result} found.`);
+                    const matches = Backend.getMatchesByNumber(result);
+                    if (!matches.length) throw new Error(`No data for the match numbered ${result} found.`);
 
-                    return match;
-                });
+                    return matches.filter((m) => m.teamNumber === teamNumber);
+                })
+                .flat();
 
             const team = new Team(teamNumber, ...matches);
             Backend.saveTeam(team);
