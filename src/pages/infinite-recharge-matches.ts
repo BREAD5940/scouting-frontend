@@ -24,7 +24,10 @@ export async function MatchView(req: AuthenticatedRequest, res: Response) {
 
 /** Adds a match */
 export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
+    let message: string | null = null;
+
     if (req.query.number) {
+        let failed: Error | null = null;
         try {
             const matchNumber = parseInt(req.query.number.toString());
             if (isNaN(matchNumber) || matchNumber < 1) {
@@ -94,14 +97,20 @@ export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
             );
 
             Backend.saveMatch(match);
-        } catch (err) {
-            return res.send(`<br /><h3>Error saving match: ${err}</h3>`);
+        } catch (err: any) {
+            failed = err;
         }
 
-        return res.send(
-            `<h4>Added a new match (<a href="/viewmatch?match=${req.query.number}">#${req.query.number}</a>)`,
-        );
+        if (failed !== null) {
+            message = `<h3 id="addmatch-error">Error saving match: ${failed}</h3>`;
+        } else {
+            message = `<h4 id="addmatch-success">Added a new match `;
+            message += `(<a href="/viewmatch?match=${req.query.number}">#${req.query.number}</a>)</h4>`;
+        }
     }
 
-    return res.send(await Resources.get('AddMatch.html'));
+    let html = await Resources.get('AddMatch.html');
+    if (!html) throw new Error('Could not load AddMatch.html');
+    if (message) html = html.replace('<!-- addition message goes here -->', message);
+    return res.send(html);
 }

@@ -42,9 +42,26 @@ body {
   text-transform: uppercase;
   font-size: 1.5em;
   padding-bottom: 20px;
-  margin-bottom: 45px;
+  margin-bottom: 10px;
   border-bottom: 1px solid #475978;
   color: #475978;
+}
+
+/* Style the match adding errors/success */
+.content-container #addmatch-success {
+  text-align: center;
+  font-size: 1em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #475978;
+  color: #475978;
+}
+
+.content-container #addmatch-error {
+  text-align: center;
+  font-size: 1em;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #475978;
+  color: #ff0000;
 }
 
 /* Style the alliance team teamnumber section */
