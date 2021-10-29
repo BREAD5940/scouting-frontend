@@ -142,7 +142,7 @@ body {
   padding: 15px 10px;
   font-family: 'Rubik', sans-serif;
   box-sizing: border-box;
-  width: calc(33.333% - calc(15px * 5));
+  width: calc(90% - 50px);
 }
 
 .decrement-button {
