@@ -116,3 +116,4 @@ databases/*
 
 # misc
 .DS_Store
+.idea/

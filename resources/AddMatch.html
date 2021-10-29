@@ -1,113 +1,127 @@
 <!DOCTYPE html>
 
 <html>
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Scouting App | Add Match</title>
-    <link rel="stylesheet" href="css/AddMatch.css">
-  </head>
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Scouting App | Add Match</title>
+  <link rel="stylesheet" href="css/AddMatch.css">
+</head>
 
-  <body>
-    <div class="content-container">
-      <h3 id="addmatch-title">Add a match</h3>
-      <!-- addition message goes here -->
-      <!-- the above comment is load-bearing; don't remove it! -->
-      <!-- TODO: use a real frontend framework and/or TSX here -->
-      <form action="/addmatch">
+<body>
+<div class="content-container">
+  <h3 id="addmatch-title">Add a match</h3>
+  <!-- addition message goes here -->
+  <!-- the above comment is load-bearing; don't remove it! -->
+  <!-- TODO: use a real frontend framework and/or TSX here -->
+  <form action="/addmatch">
 
-          <div class="team-teamnumber-div">
-            <div class="number-div">
-              <label for="number">Match number:</label> <input type="text" id="number" name="number" placeholder="Match Number">
-            </div>
-            <div class="teamnumber-div">
-              <label for="teamnumber">Team number:</label>  <input type="text" id="teamnumber" name="teamnumber" placeholder="Team Number">
-            </div>
-            <div class="clearfix"></div>
-          </div>
-
-          <div class="color-wheel-div">
-            <div class="color-div">
-              <label for="alliance">Alliance</label> <select id="alliance" name="alliance">
-                  <option value="red">Red</option>
-                  <option value="blue">Blue</option>
-              </select>
-            </div>
-            <div class="wheel-div">
-              <label for="colorwheelstate">Color Wheel</label> <select id="colorwheelstate" name="colorwheelstate">
-                  <option value="null">Not utilized</option>
-                  <option value="atcolor">Rotated to a specific color</option>
-                  <option value="rotated">Rotated a certain number of times</option>
-              </select>
-            </div>
-            <div class="clearfix"></div>
-          </div>
-
-          <div class="scored-balls-div">
-            <script>
-              function addTo(elem, amount) {
-                var curValue = parseInt(document.getElementById(elem).value) || 0;
-                document.getElementById(elem).value = (curValue + amount).toString();
-              }
-            </script>
-
-            <div class="scored-balls-label">
-              Power cells scored in auto:
-            </div>
-            <div class="scored-balls-inputs">
-              <button onclick="addTo('lowpcauto', 1);" class="increment-button" type="button">⬆️</button>
-              <input type="text" id="lowpcauto" name="lowpcauto" placeholder="Low Goal" class="low-goal">
-              <button onclick="addTo('lowpcauto', -1);" class="decrement-button" type="button">⬇️</button>
-
-              <button onclick="addTo('innerpcauto', 1);" class="increment-button" type="button">⬆️</button>
-              <input type="text" id="innerpcauto" name="innerpcauto" placeholder="Inner Goal" class="inner-goal">
-              <button onclick="addTo('innerpcauto', -1);"class="decrement-button" type="button">⬇️</button>
-
-              <button onclick="addTo('outerpcauto', 1);" class="increment-button" type="button">⬆️</button>
-              <input type="text" id="outerpcauto" name="outerpcauto" placeholder="Outer Goal" class="outer-goal">
-              <button onclick="addTo('outerpcauto', -1);" class="decrement-button" type="button">⬇️</button>
-              <div class="clearfix"></div>
-            </div>
-          </div>
-
-          <div class="scored-balls-div">
-            <div class="scored-balls-label">
-              Power cells scored in teleop:
-            </div>
-            <div class="scored-balls-inputs">
-              <button onclick="addTo('lowpcteleop', 1);" class="increment-button" type="button">⬆️</button>
-              <input type="text" id="lowpcteleop" name="lowpcteleop" placeholder="Low Goal" class="low-goal">
-              <button onclick="addTo('lowpcteleop', -1);" class="decrement-button" type="button">⬇️</button>
-
-              <button onclick="addTo('innerpcteleop', 1);" type="button">⬆️</button>
-              <input type="text" id="innerpcteleop" name="innerpcteleop" placeholder="Inner Goal" class="inner-goal">
-              <button onclick="addTo('innerpcteleop', -1);"class="decrement-button" type="button">⬇️</button>
-
-              <button onclick="addTo('outerpcteleop', 1);" class="increment-button" type="button">⬆️</button>
-              <input type="text" id="outerpcteleop" name="outerpcteleop" placeholder="Outer Goal" class="outer-goal">
-              <button onclick="addTo('outerpcteleop', -1);" class="decrement-button" type="button">⬇️</button>
-              <div class="clearfix"></div>
-            </div>
-          </div>
-
-          <div class="hanging-bots-div">
-            <div class="hanging-div">
-              <label for="hangingbots">Bots hanging from the shield generator:</label> <input type="text" id="hangingbots" name="hangingbots" placeholder="Bots hanging from the shield generator">
-            </div>
-            <div class="floor-div">
-              <label for="floorbots">Bots on the floor under the shield generator:</label> <input type="text" id="floorbots" name="floorbots" placeholder="Bots on the floor under the shield generator">
-            </div>
-            <div class="clearfix"></div>
-          </div>
-
-          <div class="level-shield-div">
-            <label for="shieldislevel">Is the Shield Generator level?</label> <input type="checkbox" id="shieldislevel" name="shieldislevel" value="true">
-          </div>
-
-          <input type="submit" value="Add match">
-      </form>
+    <div class="team-teamnumber-div">
+      <div class="number-div">
+        <label for="number">Match number:</label> <input type="text" id="number" name="number" pattern="[0-9]*" placeholder="Match Number" min="0" required>
+      </div>
+      <div class="teamnumber-div">
+        <label for="teamnumber">Team number:</label>  <input type="text" id="teamnumber" name="teamnumber" pattern="[0-9]*" placeholder="Team Number" min="0" required>
+      </div>
+      <div class="clearfix"></div>
     </div>
 
-    <script> </script> <!-- This is line is here to prevent the pageload animation bug in chrome -->
-  </body>
+    <div class="color-wheel-div">
+      <div class="color-div">
+        <label for="alliance">Alliance</label> <select id="alliance" name="alliance">
+        <option value="red">Red</option>
+        <option value="blue">Blue</option>
+      </select>
+      </div>
+      <!--            <div class="wheel-div">-->
+      <!--              <label for="colorwheelstate">Color Wheel</label> <select id="colorwheelstate" name="colorwheelstate">-->
+      <!--                  <option value="null">Not utilized</option>-->
+      <!--                  <option value="atcolor">Rotated to a specific color</option>-->
+      <!--                  <option value="rotated">Rotated a certain number of times</option>-->
+      <!--              </select>-->
+      <!--            </div>-->
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="scored-balls-div">
+      <script>
+          function addTo(elem, amount) {
+              var curValue = parseInt(document.getElementById(elem).value) || 0;
+              document.getElementById(elem).value = (curValue + amount).toString();
+          }
+      </script>
+
+      <div class="scored-balls-label">
+        Power cells scored in auto:
+      </div>
+      <div class="scored-balls-inputs">
+        <div class="single-port-input">
+          <button onclick="addTo('lowpcauto', -1);" class="decrement-button" type="button">⬇️</button>
+          <input type="text" id="lowpcauto" name="lowpcauto" pattern="[0-9]*" placeholder="Low Goal" class="low-goal" value="0" min="0" required>
+          <button onclick="addTo('lowpcauto', 1);" class="increment-button" type="button">⬆️</button>
+        </div>
+
+        <div class="single-port-input">
+          <button onclick="addTo('innerpcauto', -1);" class="decrement-button" type="button">⬇️</button>
+          <input type="text" id="innerpcauto" name="innerpcauto" pattern="[0-9]*" placeholder="Inner Goal" class="inner-goal" value="0" min="0" required>
+          <button onclick="addTo('innerpcauto', 1);" class="increment-button" type="button">⬆️</button>
+        </div>
+
+        <div class="single-port-input">
+          <button onclick="addTo('outerpcauto', -1);" class="decrement-button" type="button">⬇️</button>
+          <input type="text" id="outerpcauto" name="outerpcauto" pattern="[0-9]*" placeholder="Outer Goal" class="outer-goal" value="0" min="0" required>
+          <button onclick="addTo('outerpcauto', 1);" class="increment-button" type="button">⬆️</button>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <div class="scored-balls-div">
+      <div class="scored-balls-label">
+        Power cells scored in teleop:
+      </div>
+      <div class="scored-balls-inputs">
+        <div class="single-port-input">
+          <button onclick="addTo('lowpcteleop', -1);" class="decrement-button" type="button">⬇️</button>
+          <input type="text" id="lowpcteleop" name="lowpcteleop" pattern="[0-9]*" placeholder="Low Goal" class="low-goal" value="0" min="0" required>
+          <button onclick="addTo('lowpcteleop', 1);" class="increment-button" type="button">⬆️</button>
+        </div>
+
+        <div class="single-port-input">
+          <button onclick="addTo('innerpcteleop', -1);" class="decrement-button" type="button">⬇️</button>
+          <input type="text" id="innerpcteleop" name="innerpcteleop" pattern="[0-9]*" placeholder="Inner Goal" class="inner-goal" value="0" min="0" required>
+          <button onclick="addTo('innerpcteleop', 1);" class="increment-button" type="button">⬆️</button>
+        </div>
+
+        <div class="single-port-input">
+          <button onclick="addTo('outerpcteleop', -1);" class="decrement-button" type="button">⬇️</button>
+          <input type="text" id="outerpcteleop" name="outerpcteleop" pattern="[0-9]*" placeholder="Outer Goal" class="outer-goal" value="0" min="0" required>
+          <button onclick="addTo('outerpcteleop', 1);" class="increment-button" type="button">⬆️</button>
+        </div>
+
+        <div class="clearfix"></div>
+      </div>
+    </div>
+
+    <div class="hanging-bots-div">
+      <div class="hanging-div">
+        <label for="hangingbots">Bots hanging from the shield generator:</label> <input type="text" pattern="[0-9]*" id="hangingbots" name="hangingbots" placeholder="Bots hanging from the shield generator" value="0" min="0" required>
+      </div>
+      <div class="floor-div">
+        <label for="floorbots">Bots on the floor under the shield generator:</label> <input type="text" pattern="[0-9]*" id="floorbots" name="floorbots" placeholder="Bots on the floor under the shield generator" value="0" min="0" required>
+      </div>
+      <div class="clearfix"></div>
+    </div>
+
+    <div class="level-shield-div">
+      <label for="shieldislevel">Is the Shield Generator level?</label> <input type="checkbox" id="shieldislevel" name="shieldislevel" value="true">
+    </div>
+
+    <input type="submit" value="Add match">
+  </form>
+</div>
+
+<script> </script> <!-- This is line is here to prevent the pageload animation bug in chrome -->
+</body>
 </html>
