@@ -55,16 +55,29 @@
         Power cells scored in auto:
       </div>
       <div class="scored-balls-inputs">
+
+        <div class="port-label">
+          Lower Port:
+        </div>
+
         <div class="single-port-input">
           <button onclick="addTo('lowpcauto', -1);" class="decrement-button" type="button">⬇️</button>
           <input type="text" id="lowpcauto" name="lowpcauto" pattern="[0-9]*" placeholder="Low Goal" class="low-goal" value="0" min="0" required>
           <button onclick="addTo('lowpcauto', 1);" class="increment-button" type="button">⬆️</button>
         </div>
 
+        <div class="port-label">
+          Inner Port:
+        </div>
+
         <div class="single-port-input">
           <button onclick="addTo('innerpcauto', -1);" class="decrement-button" type="button">⬇️</button>
           <input type="text" id="innerpcauto" name="innerpcauto" pattern="[0-9]*" placeholder="Inner Goal" class="inner-goal" value="0" min="0" required>
           <button onclick="addTo('innerpcauto', 1);" class="increment-button" type="button">⬆️</button>
+        </div>
+
+        <div class="port-label">
+          Outer Port:
         </div>
 
         <div class="single-port-input">
@@ -82,16 +95,29 @@
         Power cells scored in teleop:
       </div>
       <div class="scored-balls-inputs">
+
+        <div class="port-label">
+          Lower Port:
+        </div>
+
         <div class="single-port-input">
           <button onclick="addTo('lowpcteleop', -1);" class="decrement-button" type="button">⬇️</button>
           <input type="text" id="lowpcteleop" name="lowpcteleop" pattern="[0-9]*" placeholder="Low Goal" class="low-goal" value="0" min="0" required>
           <button onclick="addTo('lowpcteleop', 1);" class="increment-button" type="button">⬆️</button>
         </div>
 
+        <div class="port-label">
+          Inner Port:
+        </div>
+
         <div class="single-port-input">
           <button onclick="addTo('innerpcteleop', -1);" class="decrement-button" type="button">⬇️</button>
           <input type="text" id="innerpcteleop" name="innerpcteleop" pattern="[0-9]*" placeholder="Inner Goal" class="inner-goal" value="0" min="0" required>
           <button onclick="addTo('innerpcteleop', 1);" class="increment-button" type="button">⬆️</button>
+        </div>
+
+        <div class="port-label">
+          Outer Port:
         </div>
 
         <div class="single-port-input">
