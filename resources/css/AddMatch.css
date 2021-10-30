@@ -138,18 +138,23 @@ body {
   font-weight: bold;
 }
 
+.port-label {
+  font-size: 0.6rem;
+}
+
 .content-container .scored-balls-div .scored-balls-inputs input {
   padding: 15px 10px;
   font-family: 'Rubik', sans-serif;
   box-sizing: border-box;
-  width: calc(90% - 50px);
+  width: calc(100% - 200px);
 }
 
-.decrement-button {
-  margin-right: 15px;
+.content-container .scored-balls-div .scored-balls-inputs button {
+  font-size: 1.25rem;
+  margin-top: 5px;
+  margin-bottom: 5px;
 }
 
-/* Style the hanging bots form section */
 .content-container .hanging-bots-div {
   width: 100%;
   margin-bottom: var(--bottom-margin);;
@@ -287,7 +292,7 @@ body {
   }
 
   .single-port-input {
-    width: 90%;
+    width: 100%;
   }
 
 }
