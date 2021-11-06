@@ -15,8 +15,14 @@ import {generateMatchView} from '../templates/ir-match';
 export async function MatchView(req: AuthenticatedRequest, res: Response) {
     if (req.query.match) {
         const num = parseInt(req.query.match.toString());
-        const matches = Backend.getMatchesByNumber(num) as InfiniteRecharge.InfiniteRechargeMatch[];
-        return res.send(generateMatchView(num, matches));
+        try {
+            const matches = Backend.getMatchesByNumber(num) as InfiniteRecharge.InfiniteRechargeMatch[];
+            return res.send(generateMatchView(num, matches));
+        } catch (e) {
+            res.status(500).send(`<h2>Error viewing match. Contact a system administrator for more information.</h2>`);
+            console.error(e);
+            return;
+        }
     }
 
     return res.send(await Resources.get('ViewMatch.html'));

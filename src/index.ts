@@ -15,7 +15,7 @@ import {ConfigLoader} from './config';
 import {AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
 import {accessGate, mkdirPromisified} from './lib';
 
-import {TeamAdd, TeamView} from './pages/teams';
+import {TeamView} from './pages/teams';
 import {MatchAdd, MatchView} from './pages/infinite-recharge-matches';
 import {ResourceManager} from './lib/resources';
 
@@ -133,10 +133,9 @@ server.get('/', async (req: AuthenticatedRequest, res) => {
             <a href="/logout">Log out</a></p>
           </div>
           <ul class="buttons">
-              <li><a href="/addteam"><div class="button">Add Team</div></a></li>
               <li><a href="/addmatch"><div class="button">Add Match</div></a></li>
               <li><a href="/viewteam"><div class="button">View Team</div></a></li>
-               <li><a href="/viewmatch"><div class="button">View Match</div></a></li>
+              <li><a href="/viewmatch"><div class="button">View Match</div></a></li>
          </ul>
          </div></body>
        </html>`;
@@ -167,7 +166,6 @@ server.get('/setauthority', accessGate('System Administrator'), AuthoritySetting
 
 // src/page/teams.ts
 server.get('/viewteam', accessGate('Team Member'), TeamView);
-server.get('/addteam', accessGate('Scouter'), TeamAdd);
 
 // src/page/infinite-recharge-matches.ts
 server.get('/viewmatch', accessGate('Team Member'), MatchView);
