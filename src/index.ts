@@ -9,14 +9,14 @@ import type {Request} from 'express';
 import {auth, RequestContext} from 'express-openid-connect';
 import {existsSync} from 'fs';
 import {sep as pathSeparator, join as joinPath} from 'path';
-import {JSONBackend, SQLBackend, InfiniteRecharge, StorageBackend} from 'frc-scouting';
+import {SQLBackend, RapidReact, StorageBackend} from 'frc-scouting';
 
 import {ConfigLoader} from './config';
 import {AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
 import {accessGate, mkdirPromisified} from './lib';
 
 import {TeamView} from './pages/teams';
-import {MatchAdd, MatchView} from './pages/infinite-recharge-matches';
+import {MatchAdd, MatchView} from './pages/rapid-react-matches';
 import {ResourceManager} from './lib/resources';
 
 export type AuthenticatedRequest = Request & {oidc?: RequestContext & {user?: any & {name?: string, email?: string}}};
@@ -59,16 +59,18 @@ if (SQLITE_REGEX.test(Config.storageLocation)) {
     if (!existsSync(storageDir)) {
         console.log(`The given storage directory doesn't exist, creating it...`);
         mkdirPromisified(storageDir).then(() => {
-            (Backend as SQLBackend).registerPlan(new InfiniteRecharge.InfiniteRechargeSQL(Config.storageLocation));
+            (Backend as SQLBackend).registerPlan(new RapidReact.RapidReactSQL(Config.storageLocation));
             console.log(`Storage plan initialized!`);
         });
     } else {
-        (Backend as SQLBackend).registerPlan(new InfiniteRecharge.InfiniteRechargeSQL(Config.storageLocation));
+        (Backend as SQLBackend).registerPlan(new RapidReact.RapidReactSQL(Config.storageLocation));
         console.log(`Storage plan initialized!`);
     }
 } else { // JSON time
-    (global as any).Backend = new JSONBackend(Config.storageLocation, new InfiniteRecharge.InfiniteRechargeJSON());
-    console.log(`Storage plan initialized!`);
+    throw new Error(
+        `Rapid React matches cannot currently be stored as JSON. ` +
+        `Please specify a path to a SQLite database in Config.storageLocation.`,
+    );
 }
 
 const server = express();
@@ -167,7 +169,7 @@ server.get('/setauthority', accessGate('System Administrator'), AuthoritySetting
 // src/page/teams.ts
 server.get('/viewteam', accessGate('Team Member'), TeamView);
 
-// src/page/infinite-recharge-matches.ts
+// src/page/rapid-react-matches.ts
 server.get('/viewmatch', accessGate('Team Member'), MatchView);
 server.get('/addmatch', accessGate('Scouter'), MatchAdd);
 // ----- End pages from other files -----

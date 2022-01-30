@@ -5,9 +5,7 @@
  */
 
 import type {Response} from 'express';
-import {InfiniteRecharge, Team} from 'frc-scouting';
 
-import {normalizePropertyName} from '../lib';
 import type {AuthenticatedRequest} from '..';
 import {displayTeam, teamViewForm} from '../templates/team';
 
