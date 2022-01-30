@@ -98,8 +98,11 @@ export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
                 low: {made: parseShot(req.query.autoshotlowmade), missed: parseShot(req.query.autoshotlowmissed)},
             };
             const teleopShots = {
-                high: {made: parseShot(req.query.teleophighmade), missed: parseShot(req.query.teleophighmissed)},
-                low: {made: parseShot(req.query.teleoplowmade), missed: parseShot(req.query.teleoplowmissed)},
+                high: {
+                    made: parseShot(req.query.teleopshothighmade),
+                    missed: parseShot(req.query.teleopshothighmissed),
+                },
+                low: {made: parseShot(req.query.teleopshotlowmade), missed: parseShot(req.query.teleopshotlowmissed)},
             };
 
             const match = new RapidReact.RapidReactMatch(
