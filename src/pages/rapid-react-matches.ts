@@ -77,9 +77,29 @@ export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
                 technical: parseInt(req.query.techfouls?.toString() || '0') || 0,
             };
 
+            if (fouls.regular < 0 || fouls.technical < 0) {
+                throw new Error(`Fouls must be nonnegative numbers.`);
+            }
+
             const cards = {
                 yellow: req.query.yellowcard?.toString() === 'true',
                 red: req.query.redcard?.toString() === 'true',
+            };
+
+            /** helper function */
+            function parseShot(value?: {toString: () => string}) {
+                const result = parseInt(value?.toString() || '0') || 0;
+                if (result < 0) throw new Error(`Shot numbers must be nonnegative.`);
+                return result;
+            }
+
+            const autoShots = {
+                high: {made: parseShot(req.query.autoshothighmade), missed: parseShot(req.query.autoshothighmissed)},
+                low: {made: parseShot(req.query.autoshotlowmade), missed: parseShot(req.query.autoshotlowmissed)},
+            };
+            const teleopShots = {
+                high: {made: parseShot(req.query.teleophighmade), missed: parseShot(req.query.teleophighmissed)},
+                low: {made: parseShot(req.query.teleoplowmade), missed: parseShot(req.query.teleoplowmissed)},
             };
 
             const match = new RapidReact.RapidReactMatch(
@@ -87,9 +107,9 @@ export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
                 type,
                 matchNumber,
                 alliance, {
-                    autoShots: {high: {made: 0, missed: 0}, low: {made: 0, missed: 0}},
-                    teleopShots: {high: {made: 0, missed: 0}, low: {made: 0, missed: 0}},
-                    climbing: RapidReact.MonkeyBarState.DidNotAttempt,
+                    autoShots,
+                    teleopShots,
+                    climbing,
                     fouls,
                     cards,
                     emergencyStopped: req.query.estopped?.toString() === 'true',
