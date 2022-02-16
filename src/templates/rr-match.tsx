@@ -56,7 +56,7 @@ export function generateMatchView(attemptedNumber: number, matches: RapidReact.R
                 {match.fouls.regular ? <li><strong>{match.fouls.regular} normal fouls</strong></li> : ``}
                 {match.fouls.technical ? <li><strong>{match.fouls.technical} technical fouls</strong></li> : ``}
 
-                <li>{match.crossedStartLineInAuto ? `Crossed` : `Did not cross`} the start line during auto</li>
+                <li>{match.crossedStartLineInAuto ? `Exited` : `Did not exit`} the tarmac during auto</li>
             </ul>
         </div>);
     }

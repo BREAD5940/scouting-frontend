@@ -142,7 +142,7 @@ body {
   padding: 15px 10px;
   font-family: 'Rubik', sans-serif;
   box-sizing: border-box;
-  width: calc(100% - 200px);
+  width: calc(100% - 20vw);
 }
 
 .content-container .scored-balls-div .scored-balls-inputs button {

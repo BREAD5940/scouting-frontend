@@ -36,18 +36,8 @@
       <div class="clearfix"></div>
     </div>
 
-    <div class="color-wheel-div">
-      <div class="color-div">
-        <label for="monkeybarstate">Climbing</label> <select id="monkeybarstate" name="monkeybarstate">
-        <option value="didnotattempt">not attempted</option>
-        <option value="none">failed</option>
-        <option value="low">lowest RUNG</option>
-        <option value="mid">middle RUNG</option>
-        <option value="high">high RUNG</option>
-        <option value="traversal">traversal (highest) RUNG</option>
-      </select>
-      </div>
-      <div class="clearfix"></div>
+    <div class="level-shield-div">
+      <label for="crossedautoline">Did the robot exit the tarmac in auto?</label> <input type="checkbox" id="crossedautoline" name="crossedautoline" value="true">
     </div>
 
     <div class="scored-balls-div">
@@ -167,15 +157,24 @@
       <label for="borked">Was the robot disabled?</label> <input type="checkbox" id="borked" name="borked" value="true">
     </div>
 
-    <div class="level-shield-div">
-      <label for="crossedautoline">Did the robot cross the start line in auto?</label> <input type="checkbox" id="crossedautoline" name="crossedautoline" value="true">
+    <div class="color-wheel-div">
+      <div class="color-div">
+        <label for="monkeybarstate">Climbing</label> <select id="monkeybarstate" name="monkeybarstate">
+        <option value="didnotattempt">not attempted</option>
+        <option value="none">failed</option>
+        <option value="low">lowest RUNG</option>
+        <option value="mid">middle RUNG</option>
+        <option value="high">high RUNG</option>
+        <option value="traversal">traversal (highest) RUNG</option>
+      </select>
+      </div>
+      <div class="clearfix"></div>
     </div>
-
 
     <input type="submit" value="Add match">
   </form>
 </div>
 
-<script> </script> <!-- This is line is here to prevent the pageload animation bug in chrome -->
+<script> </script> <!-- This line is here to prevent the pageload animation bug in chrome -->
 </body>
 </html>
