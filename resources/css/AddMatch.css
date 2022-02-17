@@ -79,7 +79,6 @@ body {
   width: 100%;
   padding: 15px 10px;
   font-family: 'Rubik', sans-serif;
-  box-sizing: border-box;
 }
 
 .content-container .team-teamnumber-div .number-div,  .content-container .team-teamnumber-div .teamnumber-div {
@@ -142,7 +141,14 @@ body {
   padding: 15px 10px;
   font-family: 'Rubik', sans-serif;
   box-sizing: border-box;
-  width: calc(100% - 20vw);
+  margin: 5px 5px;
+  width: 5rem;
+}
+
+.single-port-input {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
 }
 
 .content-container .scored-balls-div .scored-balls-inputs button {
@@ -245,7 +251,6 @@ body {
   }
 
   .content-container .team-teamnumber-div .number-div {
-    margin-right: 0px;
     margin-bottom: 20px;
   }
 
@@ -260,7 +265,6 @@ body {
   }
 
   .content-container .color-wheel-div .color-div {
-    margin-right: 0px;
     margin-bottom: 20px;
   }
 
@@ -275,7 +279,6 @@ body {
   }
 
   .content-container .scored-balls-div .scored-balls-inputs .low-goal {
-    margin-right: 0px;
     margin-bottom: 5px
   }
 
