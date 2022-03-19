@@ -10,6 +10,7 @@ import {auth, RequestContext} from 'express-openid-connect';
 import {existsSync} from 'fs';
 import {sep as pathSeparator, join as joinPath} from 'path';
 import {SQLBackend, RapidReact, StorageBackend} from 'frc-scouting';
+import {google} from 'googleapis';
 
 import {ConfigLoader} from './config';
 import {AuthorityManager, AuthoritySettingAPI, AuthorityViewingAPI} from './authority';
@@ -49,8 +50,103 @@ for (const required of requiredConfigSettings) {
     }
 }
 
+const authorization = new google.auth.GoogleAuth({
+    keyFile: __dirname + '/key.json',
+    scopes: ['https://www.googleapis.com/auth/spreadsheets'],
+});
+const googleSheets = google.sheets({
+    version: 'v4',
+    auth: authorization,
+});
+
+const storageHooks = {
+    onSaveMatch(match: RapidReact.RapidReactMatch) {
+        if (!Config.spreadsheetID) {
+            console.warn(`Config.spreadsheetID unspecified; cannot log match ${match.number} to Google Sheets`);
+            return;
+        }
+
+        let monkeyBarState;
+        switch (match.pieceTrackers[1].state) {
+        case RapidReact.MonkeyBarState.DidNotAttempt:
+            monkeyBarState = 'Did not attempt';
+            break;
+        case RapidReact.MonkeyBarState.None:
+            monkeyBarState = 'Attempted to climb but failed';
+            break;
+        case RapidReact.MonkeyBarState.Low:
+            monkeyBarState = 'Reached the low rung';
+            break;
+        case RapidReact.MonkeyBarState.Mid:
+            monkeyBarState = 'Reached the mid rung';
+            break;
+        case RapidReact.MonkeyBarState.High:
+            monkeyBarState = 'Reached the high rung';
+            break;
+        case RapidReact.MonkeyBarState.Traversal:
+            monkeyBarState = 'Reached the traversal rung';
+            break;
+        default:
+            monkeyBarState = 'Unknown monkey bar state';
+            break;
+        }
+
+        let cards = 'None';
+        if (match.cards.red && match.cards.yellow) {
+            cards = 'Both';
+        } else if (match.cards.red) {
+            cards = 'Red';
+        } else if (match.cards.yellow) {
+            cards = 'Yellow';
+        }
+
+        const row = [
+            match.teamNumber,
+            match.alliance,
+            match.type,
+            match.number,
+            match.points,
+            match.rankingPoints,
+            match.pieceTrackers[1].totalPoints,
+            monkeyBarState,
+            match.pieceTrackers[0].totalPoints,
+            match.pieceTrackers[0].totalShotsMade,
+            match.pieceTrackers[0].auto.high.made,
+            match.pieceTrackers[0].auto.high.missed,
+            match.pieceTrackers[0].auto.low.made,
+            match.pieceTrackers[0].auto.low.missed,
+            match.pieceTrackers[0].teleop.high.missed,
+            match.pieceTrackers[0].teleop.high.made,
+            match.pieceTrackers[0].teleop.low.missed,
+            match.pieceTrackers[0].teleop.low.made,
+            match.fouls.regular,
+            match.fouls.technical,
+            cards,
+            match.emergencyStopped ? 'Yes' : 'No',
+            match.borked ? 'Yes' : 'No',
+            match.crossedStartLineInAuto ? 'Yes' : 'No',
+            match.bonusPoints,
+        ];
+
+        (async () => {
+            try {
+                await googleSheets.spreadsheets.values.append({
+                    spreadsheetId: Config.spreadsheetID,
+                    range: 'Sheet1!A:Y',
+                    valueInputOption: 'RAW',
+                    requestBody: {
+                        values: [row],
+                    },
+                });
+            } catch (e) {
+                console.error(`Error saving match to Google Sheets: `, e);
+            }
+        })();
+    },
+};
+
 if (SQLITE_REGEX.test(Config.storageLocation)) {
-    (global as any).Backend = new SQLBackend();
+    (global as any).Backend = new SQLBackend(storageHooks);
 
     const storagePathParts = Config.storageLocation.split(pathSeparator);
     storagePathParts.pop(); // remove DB file

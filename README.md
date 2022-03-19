@@ -28,4 +28,7 @@ To disable authentication, add the following line at the bottom of `config.json`
 
 You'll also need to specify the --no-security command line flag (i.e. start `scouting-frontend` with `npm start -- --no-security`).
 
+### Google Sheets
+The scouting frontend can be configured to write match data to Google Sheets when matches are added. To do this, a service-worker configuration must be stored in `key.json` in the root directory, and `spreadsheetID` must be specified in `config.json`.
+
 
