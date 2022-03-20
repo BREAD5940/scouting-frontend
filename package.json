@@ -5,9 +5,9 @@
   "main": "built/index.js",
   "types": "built/index.d.ts",
   "scripts": {
-    "build": "tsc",
+    "build": "esbuild ./src/**/*.ts ./src/*.ts --outdir=built --platform=node --target=node14 --format=cjs",
     "lint": "eslint",
-    "test": "npm run build && npm run lint && jest",
+    "test": "npm run build && npm run lint && tsc && jest",
     "start": "npm run build && node built/index.js"
   },
   "repository": {

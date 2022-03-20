@@ -51,7 +51,7 @@ for (const required of requiredConfigSettings) {
 }
 
 const authorization = new google.auth.GoogleAuth({
-    keyFile: __dirname + '/key.json',
+    keyFile: joinPath(__dirname, '..', 'key.json'),
     scopes: ['https://www.googleapis.com/auth/spreadsheets'],
 });
 const googleSheets = google.sheets({
