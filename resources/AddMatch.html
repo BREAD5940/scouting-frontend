@@ -18,26 +18,31 @@
 
     <div class="team-teamnumber-div">
       <div class="number-div">
-        <label for="number">Match number:</label> <input type="text" id="number" name="number" pattern="[0-9]*" placeholder="Match Number" min="0" required>
+        <label for="number">Match number:</label> <input type="text" id="number" name="number" pattern="[0-9]*"
+                                                         placeholder="Match Number" min="0" required>
       </div>
       <div class="teamnumber-div">
-        <label for="teamnumber">Team number:</label>  <input type="text" id="teamnumber" name="teamnumber" pattern="[0-9]*" placeholder="Team Number" min="0" required>
+        <label for="teamnumber">Team number:</label> <input type="text" id="teamnumber" name="teamnumber"
+                                                            pattern="[0-9]*" placeholder="Team Number" min="0" required>
       </div>
       <div class="clearfix"></div>
     </div>
 
-    <div class="color-wheel-div">
-      <div class="color-div">
-        <label for="alliance">Alliance</label> <select id="alliance" name="alliance">
-        <option value="red">Red</option>
-        <option value="blue">Blue</option>
-      </select>
-      </div>
-      <div class="clearfix"></div>
-    </div>
+    <!--    <div class="color-wheel-div">-->
+    <!--      <div class="color-div">-->
+    <!--        <label for="alliance">Alliance</label> <select id="alliance" name="alliance">-->
+    <!--        <option value="red">Red</option>-->
+    <!--        <option value="blue">Blue</option>-->
+    <!--      </select>-->
+    <!--      </div>-->
+    <!--      <div class="clearfix"></div>-->
+    <!--    </div>-->
 
     <div class="level-shield-div">
-      <label for="crossedautoline">Did the robot exit the tarmac in auto?</label> <input type="checkbox" id="crossedautoline" name="crossedautoline" value="true">
+      <label for="crossedautoline">Did the robot exit the tarmac in auto?</label> <input type="checkbox"
+                                                                                         id="crossedautoline"
+                                                                                         name="crossedautoline"
+                                                                                         value="true">
     </div>
 
     <div class="scored-balls-div">
@@ -61,7 +66,8 @@
         </div>
         <div class="single-port-input">
           <button onclick="addTo('autoshotlowmade', -1);" class="decrement-button" type="button">⬇️</button>
-          <input type="text" id="autoshotlowmade" name="autoshotlowmade" pattern="[0-9]*" placeholder="Low Goal Made" class="low-goal" value="0" min="0" required>
+          <input type="text" id="autoshotlowmade" name="autoshotlowmade" pattern="[0-9]*" placeholder="Low Goal Made"
+                 class="low-goal" value="0" min="0" required>
           <button onclick="addTo('autoshotlowmade', 1);" class="increment-button" type="button">⬆️</button>
         </div>
         <div class="port-label">
@@ -69,7 +75,8 @@
         </div>
         <div class="single-port-input">
           <button onclick="addTo('autoshotlowmissed', -1);" class="decrement-button" type="button">⬇️</button>
-          <input type="text" id="autoshotlowmissed" name="autoshotlowmissed" pattern="[0-9]*" placeholder="Low Goal Missed" class="low-goal" value="0" min="0" required>
+          <input type="text" id="autoshotlowmissed" name="autoshotlowmissed" pattern="[0-9]*"
+                 placeholder="Low Goal Missed" class="low-goal" value="0" min="0" required>
           <button onclick="addTo('autoshotlowmissed', 1);" class="increment-button" type="button">⬆️</button>
         </div>
 
@@ -79,7 +86,8 @@
 
         <div class="single-port-input">
           <button onclick="addTo('autoshothighmade', -1);" class="decrement-button" type="button">⬇️</button>
-          <input type="text" id="autoshothighmade" name="autoshothighmade" pattern="[0-9]*" placeholder="High Goal Made" class="outer-goal" value="0" min="0" required>
+          <input type="text" id="autoshothighmade" name="autoshothighmade" pattern="[0-9]*" placeholder="High Goal Made"
+                 class="outer-goal" value="0" min="0" required>
           <button onclick="addTo('autoshothighmade', 1);" class="increment-button" type="button">⬆️</button>
         </div>
         <div class="port-label">
@@ -87,7 +95,8 @@
         </div>
         <div class="single-port-input">
           <button onclick="addTo('autoshothighmissed', -1);" class="decrement-button" type="button">⬇️</button>
-          <input type="text" id="autoshothighmissed" name="autoshothighmissed" pattern="[0-9]*" placeholder="High Goal Missed" class="outer-goal" value="0" min="0" required>
+          <input type="text" id="autoshothighmissed" name="autoshothighmissed" pattern="[0-9]*"
+                 placeholder="High Goal Missed" class="outer-goal" value="0" min="0" required>
           <button onclick="addTo('autoshothighmissed', 1);" class="increment-button" type="button">⬆️</button>
         </div>
 
@@ -106,7 +115,8 @@
         </div>
         <div class="single-port-input">
           <button onclick="addTo('teleopshotlowmade', -1);" class="decrement-button" type="button">⬇️</button>
-          <input type="text" id="teleopshotlowmade" name="teleopshotlowmade" pattern="[0-9]*" placeholder="Low Goal Made" class="low-goal" value="0" min="0" required>
+          <input type="text" id="teleopshotlowmade" name="teleopshotlowmade" pattern="[0-9]*"
+                 placeholder="Low Goal Made" class="low-goal" value="0" min="0" required>
           <button onclick="addTo('teleopshotlowmade', 1);" class="increment-button" type="button">⬆️</button>
         </div>
         <div class="port-label">
@@ -114,7 +124,8 @@
         </div>
         <div class="single-port-input">
           <button onclick="addTo('teleopshotlowmissed', -1);" class="decrement-button" type="button">⬇️</button>
-          <input type="text" id="teleopshotlowmissed" name="teleopshotlowmissed" pattern="[0-9]*" placeholder="Low Goal Missed" class="low-goal" value="0" min="0" required>
+          <input type="text" id="teleopshotlowmissed" name="teleopshotlowmissed" pattern="[0-9]*"
+                 placeholder="Low Goal Missed" class="low-goal" value="0" min="0" required>
           <button onclick="addTo('teleopshotlowmissed', 1);" class="increment-button" type="button">⬆️</button>
         </div>
 
@@ -124,7 +135,8 @@
 
         <div class="single-port-input">
           <button onclick="addTo('teleopshothighmade', -1);" class="decrement-button" type="button">⬇️</button>
-          <input type="text" id="teleopshothighmade" name="teleopshothighmade" pattern="[0-9]*" placeholder="High Goal Made" class="outer-goal" value="0" min="0" required>
+          <input type="text" id="teleopshothighmade" name="teleopshothighmade" pattern="[0-9]*"
+                 placeholder="High Goal Made" class="outer-goal" value="0" min="0" required>
           <button onclick="addTo('teleopshothighmade', 1);" class="increment-button" type="button">⬆️</button>
         </div>
         <div class="port-label">
@@ -132,7 +144,8 @@
         </div>
         <div class="single-port-input">
           <button onclick="addTo('teleopshothighmissed', -1);" class="decrement-button" type="button">⬇️</button>
-          <input type="text" id="teleopshothighmissed" name="teleopshothighmissed" pattern="[0-9]*" placeholder="High Goal Missed" class="outer-goal" value="0" min="0" required>
+          <input type="text" id="teleopshothighmissed" name="teleopshothighmissed" pattern="[0-9]*"
+                 placeholder="High Goal Missed" class="outer-goal" value="0" min="0" required>
           <button onclick="addTo('teleopshothighmissed', 1);" class="increment-button" type="button">⬆️</button>
         </div>
 
@@ -140,21 +153,52 @@
       </div>
     </div>
 
-    <div class="level-shield-div">
-      <label for="estopped">Was the robot emergency stopped?</label> <input type="checkbox" id="estopped" name="estopped" value="true">
+    <div class="scored-balls-div">
+      <div class="scored-balls-label">Penalties</div>
+      <div class="scored-balls-inputs">
+        <div class="port-label">
+          Fouls:
+        </div>
+        <div class="single-port-input">
+          <button onclick="addTo('fouls', -1);" class="decrement-button" type="button">⬇️</button>
+          <input type="text" id="fouls" name="fouls" pattern="[0-9]*" placeholder="Fouls" class="outer-goal" value="0"
+                 min="0" required>
+          <button onclick="addTo('fouls', 1);" class="increment-button" type="button">⬆️</button>
+        </div>
+        <div class="port-label">
+          Tech Fouls:
+        </div>
+        <div class="single-port-input">
+          <button onclick="addTo('techfouls', -1);" class="decrement-button" type="button">⬇️</button>
+          <input type="text" id="techfouls" name="tech-fouls" pattern="[0-9]*" placeholder="Tech Fouls"
+                 class="outer-goal" value="0" min="0" required>
+          <button onclick="addTo('techfouls', 1);" class="increment-button" type="button">⬆️</button>
+          <div class="clearfix"></div>
+        </div>
+      </div>
     </div>
 
     <div class="level-shield-div">
-      <label for="yellowcard">Did the robot get a yellow card?</label> <input type="checkbox" id="yellowcard" name="yellowcard" value="true">
+      <label for="estopped">Was the robot emergency stopped/disabled/turned off (RSL solid or off)?</label> <input
+            type="checkbox" id="estopped" name="estopped" value="true">
     </div>
 
     <div class="level-shield-div">
-      <label for="redcard">Did the robot get a red card?</label> <input type="checkbox" id="redcard" name="redcard" value="true">
+      <label for="yellowcard">Did the robot get a yellow card?</label> <input type="checkbox" id="yellowcard"
+                                                                              name="yellowcard" value="true">
+    </div>
+
+    <div class="level-shield-div">
+      <label for="redcard">Did the robot get a red card?</label> <input type="checkbox" id="redcard" name="redcard"
+                                                                        value="true">
     </div>
 
 
     <div class="level-shield-div">
-      <label for="borked">Was the robot disabled?</label> <input type="checkbox" id="borked" name="borked" value="true">
+      <label for="borked">Did the robot attempt to climb and fail (fall off/invalidated)?</label> <input type="checkbox"
+                                                                                                         id="borked"
+                                                                                                         name="borked"
+                                                                                                         value="true">
     </div>
 
     <div class="color-wheel-div">
@@ -175,6 +219,6 @@
   </form>
 </div>
 
-<script> </script> <!-- This line is here to prevent the pageload animation bug in chrome -->
+<script></script> <!-- This line is here to prevent the pageload animation bug in chrome -->
 </body>
 </html>
