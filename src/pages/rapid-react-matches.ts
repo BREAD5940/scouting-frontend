@@ -119,6 +119,9 @@ export async function MatchAdd(req: AuthenticatedRequest, res: Response) {
                     borked: req.query.borked?.toString() === 'true',
                     bonusPoints: parseInt(req.query.bonusPoints?.toString() || '0') || 0,
                     crossedStartLineInAuto: req.query.crossedautoline?.toString() === 'true',
+                    comments: req.query.comments?.toString(),
+                    defended: req.query.defended?.toString() === 'true',
+                    noShow: req.query.noshow?.toString() === 'true',
                 },
             );
 
