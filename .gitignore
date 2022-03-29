@@ -118,3 +118,6 @@ databases/*
 # misc
 .DS_Store
 .idea/
+
+# IntelliJ artifacts
+*.iml
