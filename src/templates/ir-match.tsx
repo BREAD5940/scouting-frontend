@@ -50,7 +50,7 @@ export function generateMatchView(attemptedNumber: number, matches: InfiniteRech
                     <li>{shield.rankingPoints} RP scored from the shield generator</li>
                 </ul></li>
 
-                {match.borked ? <li><strong>Borked</strong></li> : ``}
+                {match.borked ? <li><strong>Attempted to climb, but failed</strong></li> : ``}
                 {match.cards.yellow ? <li><strong>Recieved yellow card</strong></li> : ``}
                 {match.cards.red ? <li><strong>Recieved red card</strong></li> : ``}
                 {match.emergencyStopped ? <li><strong>Emergency stopped</strong></li> : ``}
