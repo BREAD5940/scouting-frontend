@@ -135,7 +135,7 @@ const storageHooks = {
             try {
                 await googleSheets.spreadsheets.values.append({
                     spreadsheetId: Config.spreadsheetID,
-                    range: 'Sheet1!A:Y',
+                    range: 'Sheet1!A:AB',
                     valueInputOption: 'RAW',
                     requestBody: {
                         values: [row],
