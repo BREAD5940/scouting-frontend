@@ -295,4 +295,10 @@ body {
     width: 90%;
   }
 
+  textarea #comments {
+    width: 90%;
+    height: 50px
+  }
+
+
 }
