@@ -126,6 +126,9 @@ const storageHooks = {
             match.borked ? 'Yes' : 'No',
             match.crossedStartLineInAuto ? 'Yes' : 'No',
             match.bonusPoints,
+            match.comments,
+            match.noShow,
+            match.defended,
         ];
 
         (async () => {
