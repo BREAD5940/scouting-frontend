@@ -5,7 +5,7 @@
   "main": "built/index.js",
   "types": "built/index.d.ts",
   "scripts": {
-    "build": "esbuild ./src/**/*.ts ./src/*.ts --outdir=built --platform=node --target=node14 --format=cjs",
+    "build": "esbuild ./src/**/*.ts ./src/*.ts ./src/**/*.tsx --outdir=built --platform=node --target=node14 --format=cjs",
     "lint": "eslint",
     "test": "npm run lint && npm run build && tsc && jest",
     "start": "npm run build && node built/index.js"
